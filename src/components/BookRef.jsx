@@ -22,7 +22,6 @@ const BookRef = ({name , author , cover}) => {
                     sx={{
                         width : {
                             xs : "78px",
-                            md : ""
                         } ,
                         height : "113px",
                         bgcolor : "#e1e1e1",
