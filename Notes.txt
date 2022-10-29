@@ -1,0 +1,26 @@
+2022/10/16:
+-setuped the app
+-worked on Navbar 
+
+2022/10/17:
+-finished navbar and sidemenu
+-worked on categorys
+
+2022/10/18:
+- i have finished logic of categorys
+
+2022/10/19 ~ 2022/10/22 : 
+- finished book page
+- finished footer
+- implemented redux for Navbar
+
+2022/10/25:
+- i have finished logic behind reader,
+  it's not porfect but i will work on it later.
+
+- i wnat to add setting for /reader who will store
+  suer's changes in localstorage, here is what i 
+  planing to add:
+
+  + background color
+  + text align style

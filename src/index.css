@@ -1,8 +1,27 @@
+@font-face {
+  font-family: YekanBakh;
+  src: url("./fonts/YekanBakh-Bold.ttf");
+}
+@font-face {
+  font-family: YekanBakh;
+  src: url("./fonts/YekanBakh-Fat.ttf");
+}
+@font-face {
+  font-family: YekanBakh;
+  src: url("./fonts/YekanBakh-Heavy.ttf");
+}
+@font-face {
+  font-family: YekanBakh;
+  src: url("./fonts/YekanBakh-Medium.ttf");
+}
+@font-face {
+  font-family: YekanBakh;
+  src: url("./fonts/YekanBakh-Regular.ttf");
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family:YekanBakh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
