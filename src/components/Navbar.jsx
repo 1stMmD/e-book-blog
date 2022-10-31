@@ -7,12 +7,16 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 
+import { useSelector } from 'react-redux';
+
 const Navbar = () => {
     const [search, setSearch] = useState(false);
     const [showSidebar , setShowSidebar] = useState(false)
 
     const textFieldRef = useRef()
     const searchRef = useRef()
+
+    const { isAdmin } = useSelector(state => state.adminSlice);
 
     const iconButtonSX = {
         fontSize : "2rem",
@@ -39,6 +43,7 @@ const Navbar = () => {
             bgcolor:"#ffffff",
         }}>
 
+            { window.location.pathname !== "/admin/create" &&
             <Fade in={!search}>
                 <IconButton
                 ref={searchRef}
@@ -50,6 +55,7 @@ const Navbar = () => {
                     sx={iconButtonSX}/>
                 </IconButton>
             </Fade>
+            }
 
             <Collapse
             in={search}
@@ -86,6 +92,7 @@ const Navbar = () => {
             </Fade>
 
             <Sidebar 
+            admin={isAdmin}
             showSidebar={showSidebar}
             setShowSidebar={setShowSidebar}/>
 

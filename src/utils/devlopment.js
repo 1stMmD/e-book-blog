@@ -2,6 +2,10 @@
 import HomeIcon from '@mui/icons-material/Home';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 
+//adimn navbar
+import AddIcon from '@mui/icons-material/Add';
+import BackpackIcon from '@mui/icons-material/Backpack';
+
 // color setting
 import ColorLensIcon from '@mui/icons-material/ColorLens';
 
@@ -10,8 +14,6 @@ import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
 import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight';
 import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
 import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
-
-import SettingsIcon from '@mui/icons-material/Settings';
 
 export const categorys = [
     {
@@ -89,5 +91,20 @@ export const setting = [
             left : "left",
             center : "center",
         }
+    }
+]
+
+export const adminSidebar = [
+    {
+        title:"پست جدید",
+        url : "/admin/create",
+        name : "create" ,
+        icon : <AddIcon sx={iconSX}/>
+    },
+    {
+        title : "کوله",
+        url : "/admin/backpack",
+        name: "backpack" ,
+        icon : <BackpackIcon sx={iconSX}/>
     }
 ]

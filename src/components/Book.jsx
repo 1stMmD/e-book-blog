@@ -37,20 +37,23 @@ const StyledButton = ({children , onClick}) => {
     );
 }
 
-const SMButton = ({ children , color , Bcolor }) => {
+export const SMButton = ({ children , color , Bcolor , disable , onClick}) => {
     return (
         <Button
+        onClick={onClick ? onClick : () => {}}
         sx={{
+            color : disable ? "black.light" : "white.main",
             minWidth:0,
             minHeight : 0 ,
             width : 60 ,
             height : 40 ,
             borderRadius : "10px",
-            bgcolor : color + ".main" ,
-            borderBottom : `3px solid ${Bcolor}`,
+            bgcolor : disable ? "grey.main" : color + ".main" ,
+            borderBottom : disable ? "" : `3px solid ${Bcolor}`,
             boxShadow : "0px 0px 12px rgba(0,0,0,.15)",
+            pointerEvents : disable ? "none" : "inset",
             "&:hover" : {
-                bgcolor : color + ".light"
+                bgcolor : disable ? "grey.main" : color + ".main",
             },
         }}>
             {children}

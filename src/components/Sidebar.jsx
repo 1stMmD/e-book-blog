@@ -5,14 +5,18 @@ import CloseIcon from '@mui/icons-material/Close';
 import Paper from "@mui/material/Paper";
 
 import { sidebarSections } from '../utils/devlopment';
+import { adminSidebar } from '../utils/devlopment';
 import { Typography } from '@mui/material';
 
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Sidebar = ({showSidebar , setShowSidebar}) => {
+const Sidebar = ({showSidebar , setShowSidebar , admin}) => {
 
     const {current} = useSelector(state => state.navbarSlice)
+
+    const sections = admin ? 
+    [...sidebarSections , ...adminSidebar] : [...sidebarSections] ;
 
     return (
         <>
@@ -71,7 +75,7 @@ const Sidebar = ({showSidebar , setShowSidebar}) => {
                 </IconButton>
             </Paper>
 
-            {sidebarSections.map((item , idx) => {
+            {sections && sections.map((item , idx) => {
                 return(
                     <Link
                     key={idx}

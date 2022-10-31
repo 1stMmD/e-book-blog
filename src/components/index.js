@@ -12,3 +12,4 @@ export {default as Progress} from "./Progress";
 export {default as Footer} from "./Footer";
 export {default as Reader} from "./Reader";
 export {default as ReaderSetting} from "./ReaderSetting";
+export {default as Admin} from "./Admin/Admin";

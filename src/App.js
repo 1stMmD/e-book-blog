@@ -1,12 +1,11 @@
-import { useState } from "react";
-
 import { 
   BrowserRouter as Router , Routes , Route 
 } from "react-router-dom"
 
 import {
   Navbar , Book , Home,
-  Saved , Footer , Reader
+  Saved , Footer , Reader,
+  Admin
 } from "./components/index";
 
 import { Provider } from "react-redux";
@@ -22,6 +21,8 @@ function App() {
           <Route path="/book" element={<Book/>}/>
           <Route path="/saved" element={<><Navbar/><Saved/></>}/>
           <Route path="/reader" element={<Reader/>}/>
+          <Route path="/admin" element={<Admin/>}/>
+          <Route path="/admin/create" element={<Navbar/>}/>
       </Routes>
       <Footer/>
     </Router>
