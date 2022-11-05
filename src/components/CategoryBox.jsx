@@ -23,7 +23,15 @@ const CategoryBox = ({header , data , type}) => {
             component="h3"
             sx={{
                 mb : 2,
-                fontSize: type === "banner" ? "1.5rem" : "1.2rem",
+                fontSize: type === "banner" ? {
+                    xs : "1.5rem",
+                    md : "1.9rem",
+                    lg : "2.3rem"
+                } : {
+                    xs : "1.2rem",
+                    md : "1.5rem",
+                    lg : "1.7rem",
+                },
                 fontWeight:"600",
                 color:"black.dark",
             }}>
@@ -36,7 +44,7 @@ const CategoryBox = ({header , data , type}) => {
                 width:"100%",
                 overflowX : "auto",
                 display:"flex",
-                gap:2,
+                gap:"max(20px,3vw)",
                 scrollSnapType:"x mandatory",
                 p : "5px 0",
             }}>

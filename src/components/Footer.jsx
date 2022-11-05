@@ -10,24 +10,29 @@ const Divider = ({type}) => {
         sx={{
             width : type === "purple" ? "60%" : "80%",
             height : "2px",
-            bgcolor : type === "purple" ? "primary.main" : "grey.main",
+            bgcolor : type === "purple" ? "primary.main" : "gray.main",
             mt : 2, 
             mb : type === "purple" ? 1 : 2,
-
+            gridColumn : {
+                lg : "1/5"
+            }
         }}/>
     )
 }
 
 const Footer = () => {
+    console.log(window.innerWidth)
     return (
         <Box
         component="footer"
         sx={{
             width : "100%",
-            display : "flex" ,
-            flexDirection : "column" ,
-            alignItems : "center",
-
+            display : "grid" ,
+            placeItems : "center",
+            gridTemplateColumns : {
+                lg : "1fr 1fr 1fr 1fr"
+            },
+            gridTemplateRows : "1fr"
         }}
         >
 
@@ -38,7 +43,10 @@ const Footer = () => {
             sx={{
                 fontWeight : "600",
                 color : "black.main",
-                fontSize : "1rem"
+                fontSize : "1rem",
+                gridColumn : {
+                    lg : "3/4"
+                }
             }}>
                 درباره ما
             </Typography>
@@ -50,11 +58,14 @@ const Footer = () => {
                 fontSize : ".8rem",
                 width : "80%",
                 textAlign : "center",
+                gridColumn : {
+                    lg : "3/4"
+                },
             }}>
                 کتبو سایت و اپلیکیشنی برای مقاله ها و پیشنهاد کتاب هست, در  کتبو میتوانید مهم ترین نکته ها از بهترین کتاب ها را در مدتی کوتاه  به صورت ساده یاد بگیرید 
             </Typography>
 
-            <Divider/>
+            { window.innerWidth <= 769 && <Divider/>}
 
             <Box
             sx={{
@@ -63,6 +74,12 @@ const Footer = () => {
                 justifyContent : "center",
                 alignItems:  "center",
                 gap : 1,
+                gridRow : {
+                    lg : "2/4"
+                },
+                gridColumn : {
+                    lg : "2/3"
+                }
             }}
             >
                 <InstagramIcon 
@@ -86,9 +103,15 @@ const Footer = () => {
             sx={{
                 fontWeight : "100",
                 color : "primary.main",
-                fontSize : "10px",
+                fontSize : {
+                    xs : "10px",
+                    md : "12px",
+                },
                 width : "100%",
                 textAlign : "center",
+                gridColumn : {
+                    lg : "1/5"
+                }
             }}>
                 .کلیه حقوق این سایت محفوظ و متعلق به تیم فُرست و کُتُبو میباشد© 
             </Typography>
@@ -98,12 +121,18 @@ const Footer = () => {
             sx={{
                 fontWeight : "100",
                 color : "white.main",
-                fontSize : "10px",
+                fontSize : {
+                    xs : "10px",
+                    md : "12px",
+                },
                 bgcolor : "primary.main",
                 width : "100%",
                 py : 1,
                 mt : 1,
                 textAlign : "center",
+                gridColumn : {
+                    lg:"1/5"
+                }
             }}>
                 ساخته شده با  ❤  از طرف محمد جمالی
             </Typography>

@@ -8,7 +8,7 @@ const Progress = () => {
                     width : "100px",
                     height : "2px",
                     mt : 1,
-                    bgcolor : "grey.main",
+                    bgcolor : "gray.main",
                     boxShadow : "0 0 10px rgba(20,20,20,.2)",
                     borderRadius : "100px",
                     zIndex : "-1" ,

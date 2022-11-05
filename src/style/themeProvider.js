@@ -11,7 +11,8 @@ const custom = createTheme({
         main : "#454545",
         dark:"#303030",
        },
-       grey : {
+       gray : {
+        dark : "#C9C9C9",
         main : "#E7E7E7"
        },
        primary:{
@@ -36,7 +37,16 @@ const custom = createTheme({
         dark : "#D71CA2",
        }
 
-    }
+    },
+    breakpoints : {
+        values : {
+            xs : 0 ,
+            sm : 320,
+            md : 481,
+            lg : 769,
+            xl : 1026,
+        }
+    },
 })
 
 const CustomTheme = ({children}) => {

@@ -9,7 +9,7 @@ import {
 import { CategoryBox } from "./index";
 
 import StarIcon from '@mui/icons-material/Star';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import ShareIcon from '@mui/icons-material/Share';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
@@ -42,18 +42,19 @@ export const SMButton = ({ children , color , Bcolor , disable , onClick}) => {
         <Button
         onClick={onClick ? onClick : () => {}}
         sx={{
+            position : "relative",
             color : disable ? "black.light" : "white.main",
             minWidth:0,
             minHeight : 0 ,
             width : 60 ,
             height : 40 ,
             borderRadius : "10px",
-            bgcolor : disable ? "grey.main" : color + ".main" ,
+            bgcolor : disable ? "gray.main" : color + ".main" ,
             borderBottom : disable ? "" : `3px solid ${Bcolor}`,
             boxShadow : "0px 0px 12px rgba(0,0,0,.15)",
             pointerEvents : disable ? "none" : "inset",
             "&:hover" : {
-                bgcolor : disable ? "grey.main" : color + ".main",
+                bgcolor : disable ? "gray.main" : color + ".main",
             },
         }}>
             {children}
@@ -83,7 +84,7 @@ const Divider = () => {
         sx={{
             width : "120px",
             height : "2px",
-            bgcolor : "grey.main",
+            bgcolor : "gray.main",
             my:2,
             alignSelf : "center",
         }}/>
@@ -115,10 +116,10 @@ const Book = () => {
             sx={{
                 position : "fixed",
                 top : 10 ,
-                left : 10 ,
+                right : 10 ,
                 zIndex : "2" ,
             }}>
-                <ArrowBackIosIcon
+                <ArrowForwardIosRoundedIcon
                 sx={{
                     color:"black.main" ,
                     fontSize : "2rem" ,
@@ -154,7 +155,7 @@ const Book = () => {
                     width : "100px",
                     height : "2px",
                     mt : 1,
-                    bgcolor : "grey.main",
+                    bgcolor : "gray.main",
                     boxShadow : "0 0 10px rgba(20,20,20,.2)",
                     "&::before" : {
                         content : "''",

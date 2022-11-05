@@ -21,12 +21,23 @@ const BookRef = ({name , author , cover}) => {
                     elevation={0}
                     sx={{
                         width : {
-                            xs : "78px",
+                            xs : "80px",
+                            md : "90px",
+                            lg : "100px"
                         } ,
-                        height : "113px",
+                        height : {
+                            xs :"120px",
+                            md : "135px",
+                            lg : "150px"
+                        },
                         bgcolor : "#e1e1e1",
-                        borderRadius : "9px",
+                        borderRadius : {
+                            xs : "9px",
+                            md : "11px",
+                            lg : "13px",
+                        },
                         backgroundImage : `url(${cover})`,
+                        backgroundSize : "contain",
                         cursor : "pointer",
                         boxShadow: "0 0 5px rgba(0,0,0,.2)",
                         mb:1,

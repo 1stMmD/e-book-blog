@@ -30,3 +30,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* * {
+  outline: 1px solid green;
+} */
+
+*::-webkit-scrollbar
+{
+  width : 6px ;
+  height : 6px;
+  cursor: pointer;
+}
+*::-webkit-scrollbar-thumb
+{
+  background-color : #afafaf;
+  border-radius: 100px;
+}

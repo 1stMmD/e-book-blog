@@ -17,22 +17,29 @@ const Saved = () => {
         sx={{
             display : "grid",
             placeItems : "center",
-            gridTemplateColumns : "1fr 1fr",
-            width : "100%",
-            minHeight : "70vh"
         }}
         >
+            <Box
+            sx={{
+                display : "grid",
+                placeItems : "center",
+                gridTemplateColumns : "repeat(auto-fit , minmax(130px , 1fr))",
+                width : "90%",
+                minHeight : "70vh"
+            }}>
 
-            <SavedBook/>
-            <SavedBook/>
-            <SavedBook/>
-            <SavedBook/>
-            <SavedBook/>
-            <SavedBook/>
-            <SavedBook/>
-            <SavedBook/>
-            <SavedBook/>
-            <SavedBook/>
+                <SavedBook/>
+                <SavedBook/>
+                <SavedBook/>
+                <SavedBook/>
+                <SavedBook/>
+                <SavedBook/>
+                <SavedBook/>
+                <SavedBook/>
+                <SavedBook/>
+                <SavedBook/>
+
+            </Box>
 
         </Box>
     );

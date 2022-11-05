@@ -7,7 +7,7 @@ const SavedBook = () => {
         sx={{
             width: "fit-content",
             height : "fit-content",
-            m : 1
+            m : 2
         }}>
             <Box
             component="img"

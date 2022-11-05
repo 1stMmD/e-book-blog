@@ -5,10 +5,10 @@ const BannerRef = () => {
         <Paper
         elevation={0}
         sx={{
-            minWidth:"280px",
-            height:"140px",
+            minWidth:"max(220px,50vw)",
+            minHeight:"max(110px,25vw)",
             bgcolor:"#e1e1e1",
-            borderRadius : "15px",
+            borderRadius : "4vw",
             scrollSnapAlign:"start",
         }}>
             

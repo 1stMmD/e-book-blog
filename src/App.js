@@ -5,7 +5,8 @@ import {
 import {
   Navbar , Book , Home,
   Saved , Footer , Reader,
-  Admin
+  Admin , Create , BackPack, 
+  EditBook , EditBanner
 } from "./components/index";
 
 import { Provider } from "react-redux";
@@ -22,7 +23,10 @@ function App() {
           <Route path="/saved" element={<><Navbar/><Saved/></>}/>
           <Route path="/reader" element={<Reader/>}/>
           <Route path="/admin" element={<Admin/>}/>
-          <Route path="/admin/create" element={<Navbar/>}/>
+          <Route path="/admin/create" element={<><Navbar/><Create/></>}/>
+          <Route path="/admin/backpack" element={<BackPack/>}/>
+          <Route path="/admin/editbook" element={<EditBook/>}/>
+          <Route path="/admin/editbanner" element={<EditBanner/>}/>
       </Routes>
       <Footer/>
     </Router>

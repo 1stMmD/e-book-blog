@@ -23,12 +23,14 @@ const Sidebar = ({showSidebar , setShowSidebar , admin}) => {
         <Box
         sx={{
             position:"fixed",
-            display : "block",
+            display : {
+                xs :"block",
+                lg : "none"
+            },
             width:"100%",
             height:"100vh",
             bgcolor : "black.main",
             opacity:".3",
-            transition : "all 200ms",
             top : "0",
             right : showSidebar ? "0" : "-100%",
         }}>
@@ -38,7 +40,10 @@ const Sidebar = ({showSidebar , setShowSidebar , admin}) => {
         <Box
         sx={{
             position : "fixed",
-            display : "block",
+            display : {
+                xs :"block",
+                lg : "none"
+            },
             width : "200px",
             height : "100vh",
             bgcolor : "#fff",
@@ -46,7 +51,7 @@ const Sidebar = ({showSidebar , setShowSidebar , admin}) => {
             boxShadow : "-4px 0 12px rgba(20,20,20,.12)",
             top : "0",
             right : showSidebar ? "0" : "-300px",
-            zIndex : "5"
+            zIndex : 6
         }}
         >
             <Paper
