@@ -21,7 +21,7 @@ const Reader = () => {
 
     //this will turn to a state
     //      👇🏻
-    const fontSize = 16;
+    const fontSize = 20;
     const [theme , setTheme] = useState(JSON.parse(localStorage.getItem("theme")) || {name : "default" , color : "#fff" , fontColor : "#252525"})
     const [align , setAlign] = useState(JSON.parse(localStorage.getItem("align")) || "justify");
 
