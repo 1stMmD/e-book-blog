@@ -17,4 +17,5 @@ export {default as Create} from "./Admin/Create";
 export {default as BackPack} from "./Admin/BackPack";
 export {default as EditBook} from "./Admin/EditBook";
 export {default as EditBanner} from "./Admin/EditBanner";
+export {default as ErrorBox} from "./global/ErrorBox";
 

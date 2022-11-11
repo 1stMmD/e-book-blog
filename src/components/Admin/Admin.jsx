@@ -14,6 +14,8 @@ import LockIcon from '@mui/icons-material/Lock';
 
 import { SMButton as StyledButton } from "../Book";
 
+import { ErrorBox } from "../index";
+
 const Admin = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -21,7 +23,7 @@ const Admin = () => {
     //for functionality
     const [password , setPassword] = useState("");
     const [username , setUsername] = useState("");
-
+    const [error , setError] = useState("")
 
     //for ux
     const [disable , setDisable] = useState(false);
@@ -62,6 +64,19 @@ const Admin = () => {
             ref={form}
             onSubmit={(e) => {
                 e.preventDefault();
+
+                if(username !== "admin"){
+                    setUsername("");
+                    setDisable(false)
+                    return setError("کاربر پیدا نشد");
+                }
+
+                if(password !== "password"){ 
+                    setPassword("");
+                    setDisable(false)
+                    return setError("رمز وارد شده اشتباه است");
+                }
+                
                 if(
                     username === "admin" &&
                     password === "password"
@@ -70,7 +85,6 @@ const Admin = () => {
                     navigate("/");
                     return;
                 }
-
                 setPassword("");
                 setUsername("");
                 setDisable(false)
@@ -88,7 +102,8 @@ const Admin = () => {
                 borderRadius : "15px",
                 display : "grid",
                 placeItems : "center",
-                boxShadow : "0 4px 12px rgba(20,20,20,.2)"
+                boxShadow : "0 4px 12px rgba(20,20,20,.2)",
+                zIndex : "4",
             }}>
 
                 <Typography
@@ -137,7 +152,7 @@ const Admin = () => {
                 placeholder="password"
 
                 //change visinility of password
-                type={showPassword ? "password" : "text"}
+                type={showPassword ? "text" : "password"}
                 endAdornment={
                     <InputAdornment
                     ref={monkey}
@@ -150,9 +165,9 @@ const Admin = () => {
                     }}
                     position="end">
                         {showPassword ? 
-                        "🙈"
-                        :
                         "🙉"
+                        :
+                        "🙈"
                         }
                         
                     </InputAdornment>
@@ -182,6 +197,10 @@ const Admin = () => {
                 </StyledButton>
 
             </Box>
+
+            <ErrorBox
+            Error={error}
+            SetError={setError}/>
         </>
     );
 }

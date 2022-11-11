@@ -51,7 +51,7 @@ export const SMButton = ({ children , color , Bcolor , disable , onClick}) => {
             borderRadius : "10px",
             bgcolor : disable ? "gray.main" : color + ".main" ,
             borderBottom : disable ? "" : `3px solid ${Bcolor}`,
-            boxShadow : "0px 0px 12px rgba(0,0,0,.15)",
+            boxShadow : "0px 0px 10px rgba(0,0,0,.15)",
             pointerEvents : disable ? "none" : "inset",
             "&:hover" : {
                 bgcolor : disable ? "gray.main" : color + ".main",

@@ -115,7 +115,8 @@ const Navbar = () => {
             <Sidebar 
             admin={isAdmin}
             showSidebar={showSidebar}
-            setShowSidebar={setShowSidebar}/>
+            setShowSidebar={setShowSidebar}
+            type="mobile"/>
 
         </Box>
 
@@ -129,7 +130,7 @@ const Navbar = () => {
                 xs : "none",
                 lg : "flex",
             },
-            justifyContent : search ? "center" : "space-between",
+            justifyContent : "space-evenly",
             alignItems : "center",
             bgcolor:"#ffffff",
         }}>
@@ -178,6 +179,12 @@ const Navbar = () => {
                 </Box>
 
             </Box>
+
+            <Sidebar 
+            admin={isAdmin}
+            showSidebar={showSidebar}
+            setShowSidebar={setShowSidebar}
+            type="pc"/>
 
         </Box>
 

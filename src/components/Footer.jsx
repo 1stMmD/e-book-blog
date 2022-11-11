@@ -21,7 +21,6 @@ const Divider = ({type}) => {
 }
 
 const Footer = () => {
-    console.log(window.innerWidth)
     return (
         <Box
         component="footer"

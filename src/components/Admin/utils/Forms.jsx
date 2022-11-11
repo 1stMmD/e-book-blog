@@ -10,12 +10,12 @@ const StyledTextField = ({...attr}) => {
     return(<TextField
             {...attr}
             sx={{
-                p : 0,
                 width : "100%",
                 mb : 2 ,
                 "input" : {
-                    p : .5,
-                    fontSize : ".7rem",
+                    px : 1,
+                    py : 1,
+                    fontSize : "1rem",
                 }
             }}/>)
 }
@@ -26,6 +26,7 @@ return(<Box
     value={value}
     onChange={onChange}
     sx={{
+        fontSize : "1rem",
         maxWidth : "calc(100% - 8px)",
         minWidth : "calc(100% - 8px)",
         width : "calc(100% - 8px)",

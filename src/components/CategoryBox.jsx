@@ -14,6 +14,7 @@ const CategoryBox = ({header , data , type}) => {
         <Box
         dir="rtl"
         sx={{
+            position : "relative",
             width : type === "bookPage" ? "80vw" : "90vw",
             display : "flex",
             flexDirection : "column",
@@ -41,6 +42,7 @@ const CategoryBox = ({header , data , type}) => {
             <Box
             component="div"
             sx={{
+                position : "relative",
                 width:"100%",
                 overflowX : "auto",
                 display:"flex",
@@ -59,7 +61,6 @@ const CategoryBox = ({header , data , type}) => {
                 })}
             </Box>
 
-            
         </Box>
     );
 }

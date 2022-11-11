@@ -21,7 +21,7 @@ const Reader = () => {
 
     //this will turn to a state
     //      👇🏻
-    const fontSize = 20;
+    const fontSize = 18;
     const [theme , setTheme] = useState(JSON.parse(localStorage.getItem("theme")) || {name : "default" , color : "#fff" , fontColor : "#252525"})
     const [align , setAlign] = useState(JSON.parse(localStorage.getItem("align")) || "justify");
 
@@ -76,7 +76,7 @@ const Reader = () => {
 
         let {current : p} = page;
 
-        let length = Math.round((p.offsetWidth * p.offsetHeight) / (fontSize * (fontSize * 0.80))) ;
+        let length = Math.round((p.offsetWidth * p.offsetHeight) / (fontSize * (fontSize * 0.85))) ;
 
         setCurrentPage(findPage(length))
 
