@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-
-
+import { Swiper , SwiperSlide } from "swiper/react"
+import "swiper/css";
 import {BookRef , BannerRef} from "../index";
 
 const CategoryBox = ({header , data , type , isPending}) => {
@@ -48,26 +48,50 @@ const CategoryBox = ({header , data , type , isPending}) => {
                 gap : 1,
                 p : "5px 0",
             }}>
+                <Swiper
+                breakpoints={
+                    type === "banner" ?
+                    {
+                    0: {
+                      width: 0,
+                      slidesPerView: 1,
+                    },
+                  }
+                :
+                {
+                    0: {
+                        width : 0,
+                        slidesPerView : 3,
+                    }
+                }}
+                >
                 {isPending && (type === "banner" ? 
-                    <BannerRef/>
+                    <SwiperSlide><BannerRef/></SwiperSlide>
                     :
-                    <BookRef/>)
+                    <SwiperSlide><BookRef/></SwiperSlide>
+                    )
                 }
                 {data && data.map((item , idx) => {
                     return type === "banner" ? 
-                                <BannerRef
-                                key={idx}
-                                title={item.title}
-                                link={item.link}
-                                cover={item.cover}
-                                /> :
+                                <SwiperSlide>
+                                    <BannerRef
+                                    key={idx}
+                                    title={item.title}
+                                    link={item.link}
+                                    cover={item.cover}
+                                    /> 
+                                </SwiperSlide>
+                                :
+                                <SwiperSlide>
                                 <BookRef
                                 key={idx} 
                                 author={item.author} 
                                 name={item.name}
                                 cover={item.cover}
                                 bookID={item.id}/>
+                                </SwiperSlide>
                 })}
+                </Swiper>
             </Box>
 
         </Box>
