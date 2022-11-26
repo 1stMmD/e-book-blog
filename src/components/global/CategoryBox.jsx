@@ -12,7 +12,7 @@ const CategoryBox = ({header , data , type , isPending}) => {
     const startPoint = useRef(0)
 
     useEffect(() => {
-        if(container){
+        if(container , books){
 
             const { current : cont } = container;
 
@@ -63,16 +63,25 @@ const CategoryBox = ({header , data , type , isPending}) => {
             }
             
             cont.addEventListener("mousedown" , (e) => {
+                setTimeout(() => {
+                    books.current.firstChild.style.pointerEvents = "inherit"
+                },200)
                 startPoint.current = e.layerX ;
                 cont.addEventListener("mousemove" , handle)
             })
 
             cont.addEventListener("mouseup" , (e) => {
+                setTimeout(() => {
+                    books.current.firstChild.style.pointerEvents = "none"
+                },200)
                 fit()
                 cont.removeEventListener("mousemove" , handle)
             })
 
             cont.addEventListener("mouseleave" , (e) => {
+                setTimeout(() => {
+                    books.current.firstChild.style.pointerEvents = "none"
+                },200)
                 fit()
                 cont.removeEventListener("mousemove" , handle)
             })
@@ -88,7 +97,6 @@ const CategoryBox = ({header , data , type , isPending}) => {
             })
 
         }
-
     },[container])
     
     return (
@@ -97,7 +105,7 @@ const CategoryBox = ({header , data , type , isPending}) => {
         sx={{
             py : 1,
             position : "relative",
-            width : type === "bookPage" ? "80vw" : "min(1000px,90vw)",
+            width : type === "bookPage" ? "80vw" : "min(1100px,90vw)",
             display : "flex",
             flexDirection : "column",
             mt :  type === "bookPage" ? 0 : 0,
@@ -139,8 +147,20 @@ const CategoryBox = ({header , data , type , isPending}) => {
                 ref={books}
                 sx={{
                     display : "flex",
-                    gap : 2,
+                    gap : 4,
+                    position : "relative",
                 }}>
+                
+                <Box
+                sx={{
+                    pointerEvents : "none",
+                    display : "flex",
+                    position : "absolute",
+                    bgcolor : "transparent",
+                    width : "100%",
+                    height : "100%"
+                }}/>
+
                 {isPending && (type === "banner" ? 
                     <BannerRef/>
                     :
