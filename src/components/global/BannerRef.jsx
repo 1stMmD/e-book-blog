@@ -3,6 +3,12 @@ import Paper from "@mui/material/Paper";
 const BannerRef = ({cover , link , title}) => {
     return (
         <Paper
+        onClick={() => {
+            console.log("banner got clicked")
+        }}
+        onDragStart={(e) => {
+            e.preventDefault();
+        }}
         elevation={0}
         sx={{
             minWidth:"clamp(220px,50vw,700px)",

@@ -6,6 +6,9 @@ import { Link } from "react-router-dom"
 const BookRef = ({name , author , cover , bookID}) => {
     return (
             <Box
+            onDragStart={(e) => {
+                e.preventDefault();
+            }}
             sx={{
                 display : "flex",
                 alignItems : "center",
@@ -47,7 +50,7 @@ const BookRef = ({name , author , cover , bookID}) => {
                     }}/>
                 </Link>
                 
-                {/* <Typography
+                <Typography
                 variant="body2"
                 sx={{
                     fontSize : {
@@ -78,7 +81,7 @@ const BookRef = ({name , author , cover , bookID}) => {
                     color : "black.main",
                 }}>
                     {author ? author : "..."}
-                </Typography> */}
+                </Typography>
             </Box>
     );
 }

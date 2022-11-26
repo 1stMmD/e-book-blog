@@ -1,12 +1,96 @@
+import { useEffect , useRef } from "react"
+
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-
-
 import {BookRef , BannerRef} from "../index";
 
 const CategoryBox = ({header , data , type , isPending}) => {
 
+    const container = useRef()
+    const books = useRef()
+    const value = useRef(0)
+    const startPoint = useRef(0)
 
+    useEffect(() => {
+        if(container){
+
+            const { current : cont } = container;
+
+            const fit = () => {
+                let width = cont.firstChild.offsetWidth - cont.offsetWidth
+                let delay = 0;
+
+                cont.style.transition = "all 300ms";
+                if(value.current > width){
+                    value.current = width;
+                    cont.style.transform = `translate3d(${value.current}px,0,0)`;
+                    delay = 300
+                    cont.style.pointerEvents = "none"
+                    setTimeout(() => {
+                        cont.style.pointerEvents = "inherit"
+                    },300)
+                }
+                if(value.current < 0){
+                    value.current = 0;
+                    cont.style.transform = `translate3d(${value.current}px,0,0)`;
+                    delay = 300
+                    cont.style.pointerEvents = "none"
+                    setTimeout(() => {
+                        cont.style.pointerEvents = "inherit"
+                    },300)
+                }
+                setTimeout(() => {
+                    cont.style.transition = "none"
+                },delay)
+            }
+
+            const handleTouch = (e) => {
+                let clientX = e.touches[0].clientX;
+                let cvalue = value.current;
+                let X = clientX - startPoint.current;
+                value.current = cvalue + X;
+                cont.style.transform = `translate3d(${value.current}px,0,0)`
+                startPoint.current = clientX 
+            }
+
+            const handle = (e) => {
+                let clientX = e.layerX;
+                let cvalue = value.current;
+                let X = clientX - startPoint.current;
+                value.current = cvalue + X;
+                cont.style.transform = `translate3d(${value.current}px,0,0)`
+                startPoint.current = clientX;
+            }
+            
+            cont.addEventListener("mousedown" , (e) => {
+                startPoint.current = e.layerX ;
+                cont.addEventListener("mousemove" , handle)
+            })
+
+            cont.addEventListener("mouseup" , (e) => {
+                fit()
+                cont.removeEventListener("mousemove" , handle)
+            })
+
+            cont.addEventListener("mouseleave" , (e) => {
+                fit()
+                cont.removeEventListener("mousemove" , handle)
+            })
+
+            cont.addEventListener("touchstart" , (e) => {
+                startPoint.current = e.touches[0].clientX 
+                cont.addEventListener("touchmove" , handleTouch)
+            },true)
+
+            cont.addEventListener("touchend" , () => {
+                fit()
+                cont.removeEventListener("mousemove" , handleTouch)
+            })
+
+        }
+
+    },[container])
+    
     return (
         <Box
         dir="rtl"
@@ -17,6 +101,7 @@ const CategoryBox = ({header , data , type , isPending}) => {
             display : "flex",
             flexDirection : "column",
             mt :  type === "bookPage" ? 0 : 0,
+            overflowX : "hidden",
         }}>
             <Typography
             component="h3"
@@ -39,15 +124,23 @@ const CategoryBox = ({header , data , type , isPending}) => {
             </Typography>
 
             <Box
+            ref={container}
             component="div"
             sx={{
                 position : "relative",
                 width:"100%",
-                overflowX : "auto",
                 display:"flex",
-                gap : 1,
+                
                 p : "5px 0",
+                transform : "translate3d(0,0,0)",
+                cursor : "grab"
             }}>
+                <Box
+                ref={books}
+                sx={{
+                    display : "flex",
+                    gap : 2,
+                }}>
                 {isPending && (type === "banner" ? 
                     <BannerRef/>
                     :
@@ -68,6 +161,7 @@ const CategoryBox = ({header , data , type , isPending}) => {
                                 cover={item.cover}
                                 bookID={item.id}/>
                 })}
+                </Box>
             </Box>
 
         </Box>
