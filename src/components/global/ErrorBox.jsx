@@ -9,7 +9,8 @@ const ErrorBox = ({Error , SetError}) => {
 
         <Box
         sx={{
-            position : Error ? "fixed" : "none",
+            position : "fixed",
+            display : Error ? "block" : "none",
             width: "100%",
             height: "100vh",
             bgcolor : "rgba(25,25,25,.3)",
@@ -20,7 +21,7 @@ const ErrorBox = ({Error , SetError}) => {
         <Box
             sx={{
             position : "absolute",
-            display : "flex",
+            display : Error ? "flex" : "none",
             flexDirection : "column",
             alignItems : "center",
             justifyContent : "center",
