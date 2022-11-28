@@ -3,7 +3,9 @@ import {
     GoogleAuthProvider , 
     signInWithPopup , 
     onAuthStateChanged,
-    signOut as sOut
+    signOut as sOut,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword
  } from "firebase/auth";
 import store from "../redux/configureStore";
 import { changeUser } from "../redux/authSlice";
@@ -11,7 +13,7 @@ import { changeUser } from "../redux/authSlice";
 import { getUserDoc } from "./firestore";
 
 export const signInWithGoogle = () => {
-    signInWithPopup(auth , new GoogleAuthProvider)
+    signInWithPopup(auth , new GoogleAuthProvider())
     .then(() => {
         console.log("signed in")
         window.location="/"
@@ -26,7 +28,8 @@ export const handleAuthChanges = () => {
             return
         }
         getUserDoc({
-            id : user.email,
+            id : user.uid,
+            email : user.email,
             displayName : user.displayName
         })
         store.dispatch(changeUser({
@@ -39,6 +42,28 @@ export const handleAuthChanges = () => {
     })
 
     return unsubscribe
+}
+
+export const signupWithEmail = (email , password) => {
+    createUserWithEmailAndPassword(auth , email , password)
+    .then(() => {
+        console.log("signed in")
+        window.location="/"
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+}
+
+export const signInWithEmail = (email , password) => {
+    signInWithEmailAndPassword(auth , email , password)
+    .then(() => {
+        console.log("signed in")
+        window.location="/"
+    })
+    .catch((err) => {
+        console.log(err)
+    })
 }
 
 export const signOut = () => {

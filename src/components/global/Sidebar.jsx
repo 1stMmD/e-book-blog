@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Paper from "@mui/material/Paper";
 
-import { sidebarSections , adminSidebar } from '../../utils/navbarSections';
+import { sidebarSections , authorSidebar , adminSidebar } from '../../utils/navbarSections';
 import { Typography } from '@mui/material';
 
 import { useSelector } from 'react-redux';
@@ -38,10 +38,12 @@ const XlButtons = ({color , icon , url , title}) => {
 const Sidebar = ({showSidebar , setShowSidebar , admin , type}) => {
 
     const {current} = useSelector(state => state.navbarSlice)
+    const { user } = useSelector(state => state.authSlice)
 
-    const sections = admin ? 
-    [...sidebarSections , ...adminSidebar] : [...sidebarSections] ;
-
+    let sections = sidebarSections;
+    if(user?.author) sections = [...sections , ...authorSidebar]
+    if(user?.email === "mmdj27634@gmail.com") sections = [...sections , ...adminSidebar]
+    
     return (
     <>
         { type === "mobile" && 
@@ -107,14 +109,14 @@ const Sidebar = ({showSidebar , setShowSidebar , admin , type}) => {
                     </IconButton>
                 </Paper>
 
-                {sections && sections.map((item , idx) => {
+                {sections && sections?.map((item , idx) => {
                     return(
                         <Link
                         key={idx}
                         onClick={() => {
                             setShowSidebar(false)
                         }}
-                        to={item.url}
+                        to={item?.url}
                         style={{
                             textDecoration : "none",
                         }}>
@@ -130,16 +132,16 @@ const Sidebar = ({showSidebar , setShowSidebar , admin , type}) => {
                                 fontWeight: "600",
                                 cursor:"pointer",
                                 color:"black.light",
-                                bgcolor : item.name === current ? "#F2F2F2" : "",
+                                bgcolor : item?.name === current ? "#F2F2F2" : "",
                                 "&:hover":{
                                     color:"black.main",
                                 },
                             }}>
-                                {item.icon}
+                                {item?.icon}
                                 <Typography
                                 variant="body1"
                                 >
-                                    {item.title}
+                                    {item?.title}
                                 </Typography>
                             </Paper>
                         </Link>
@@ -156,24 +158,24 @@ const Sidebar = ({showSidebar , setShowSidebar , admin , type}) => {
             display : "flex",
             gap : 1,
         }}>
-            {sections.map((item,idx) => {
-                if(current === item.name) {
+            {sections?.map((item,idx) => {
+                if(current === item?.name) {
 
                     return <XlButtons
-                           title={item.title}
+                           title={item?.title}
                            key={idx}
                            color="gray.light"
-                           icon={item.noMarginIcon}
-                           url = {item.url}
+                           icon={item?.noMarginIcon}
+                           url = {item?.url}
                            />
 
                 }
                     return <XlButtons
-                            title={item.title}
+                            title={item?.title}
                             key={idx}
                             color = "primary.main"
-                            icon = {item.whiteIcon}
-                            url = {item.url}
+                            icon = {item?.whiteIcon}
+                            url = {item?.url}
                             />
                 
             })}

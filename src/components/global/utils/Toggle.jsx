@@ -3,7 +3,7 @@ import SMButton from "./SMButton";
 import { useSelector } from "react-redux"
 
 const Toggle = ({section , setSection}) => {
-    const { isAdmin } = useSelector(state => state.adminSlice);
+    const { user } = useSelector(state => state.authSlice);
 
     return (
         <>
@@ -32,7 +32,7 @@ const Toggle = ({section , setSection}) => {
                     کتاب
                 </SMButton>
 
-                { isAdmin ?
+                { user?.admin ?
                 <SMButton
                 size="responsive"
                 onClick={() => {

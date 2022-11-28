@@ -1,5 +1,5 @@
 import HomeIcon from '@mui/icons-material/Home';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
+import PersonIcon from '@mui/icons-material/Person';
 import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
 import AddIcon from '@mui/icons-material/Add';
 import BackpackIcon from '@mui/icons-material/Backpack';
@@ -31,13 +31,16 @@ export const sidebarSections = [
         noMarginIcon : <HomeIcon sx={noMarginIconSX}/>,
     },
     {
-        title : "ذخیره شده ها",
+        title : "پروفایل",
         url : "/saved",
         name: "saved" ,
-        icon : <BookmarkIcon sx={iconSX}/>,
-        whiteIcon : <BookmarkIcon sx={whiteIconSX}/>,
-        noMarginIcon : <BookmarkIcon sx={noMarginIconSX}/>,
-    },
+        icon : <PersonIcon sx={iconSX}/>,
+        whiteIcon : <PersonIcon sx={whiteIconSX}/>,
+        noMarginIcon : <PersonIcon sx={noMarginIconSX}/>,
+    }
+];
+
+export const authorSidebar = [
     {
         title:"پست جدید",
         url : "/create",
@@ -46,7 +49,7 @@ export const sidebarSections = [
         whiteIcon : <AddIcon sx={whiteIconSX}/>,
         noMarginIcon : <AddIcon sx={noMarginIconSX}/>,
     }
-];
+]
 
 export const adminSidebar = [
     {
@@ -58,11 +61,12 @@ export const adminSidebar = [
         noMarginIcon : <BackpackIcon sx={noMarginIconSX}/>,
     },
     {
-        title : "لیست درخواست ها",
+        title : "درخواست ها",
         url : "/requests",
         name: "requests" ,
         icon : <PlaylistAddCheckIcon sx={iconSX}/>,
         whiteIcon : <PlaylistAddCheckIcon sx={whiteIconSX}/>,
         noMarginIcon : <PlaylistAddCheckIcon sx={noMarginIconSX}/>,
-    }
+    },
+    
 ]

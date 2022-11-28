@@ -11,11 +11,7 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import ShareIcon from '@mui/icons-material/Share';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import InstagramIcon from '@mui/icons-material/Instagram';
 import useAxios from "../../hooks/useAxios";
-import SMButton from '../global/utils/SMButton';
 
 import axios from 'axios';
 import { useDispatch } from "react-redux"
@@ -348,55 +344,11 @@ const Book = () => {
 
                     <Divider/>
 
-                    <H3>
-                       توضیحات نویسنده پست
-                    </H3>
-                    <Typography
-                    sx={{
-                        fontSize : 14,
-                        color : "black.light"
-                    }}
-                    >
-                        {data?.aboutPost}
-                    </Typography>
-
-                    <Divider/>
-
                     <CategoryBox
                     header="کتاب های مشابه"
                     type="bookPage"
                     />
 
-                    <Divider/>
-
-                    <H3>
-                        کتاب اصلی و نویسنده
-                    </H3>
-                    <Box
-                    sx={{
-                        display : "flex",
-                        justifyContent : "space-evenly",
-                        mb : 2,
-                    }}>
-                        <SMButton color="yellow" Bcolor="#E1B92C">
-                            <ShoppingCartIcon
-                            sx={{
-                                color:"white.main"
-                            }}/>
-                        </SMButton>
-                        <SMButton color="blue" Bcolor="#1F81DB">
-                            <TwitterIcon
-                            sx={{
-                                color:"white.main"
-                            }}/>
-                        </SMButton>
-                        <SMButton color="pink" Bcolor="#D71CA2">
-                            <InstagramIcon
-                            sx={{
-                                color:"white.main"
-                            }}/>
-                        </SMButton>
-                    </Box>
                 </Box>
 
             </Box>

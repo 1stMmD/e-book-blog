@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 import CategoryInput from '../../global/CategoryInput';
-import finalPropsSelectorFactory from 'react-redux/es/connect/selectorFactory';
+import { createBookDoc } from '../../../functions/firestore';
 
 const textStyle = {
     fontSize : {
@@ -173,12 +173,7 @@ export const BookForm = ({type , setSuccess , setError}) => {
     const [bookAuthor , setBookAuthor] = useState("")
     const [aboutBook , setAboutBook] = useState("")
     const [bookContent , setBookContent] = useState("")
-    const [contentCreator , setContentCreator] = useState("")
-    const [aboutContent , setAboutContent] = useState("")
     const [bookCover , setBookCover] = useState("")
-    const [bookBuyLink , setBookBuyLink] = useState("")
-    const [authorTwitter , setAuthorTwitter] = useState("")
-    const [authorInstagram , setAuthorInstagram] = useState("")
     const [disabled , setDisabled] = useState(false)
 
     return (
@@ -210,14 +205,6 @@ export const BookForm = ({type , setSuccess , setError}) => {
 
                     <Typography
                     sx={textStyle}
-                    >اسم نویسنده پست</Typography>
-                    <StyledTextField
-                    value={contentCreator}
-                    setValue={setContentCreator}
-                    />
-
-                    <Typography
-                    sx={textStyle}
                     >متن پست</Typography>
                     <TextArea
                     value={bookContent}
@@ -230,14 +217,6 @@ export const BookForm = ({type , setSuccess , setError}) => {
                     <TextArea
                     value={aboutBook}
                     setValue={setAboutBook}
-                    />
-
-                    <Typography
-                    sx={textStyle}
-                    >توضیحات نویسنده پست</Typography>
-                    <TextArea
-                    value={aboutContent}
-                    setValue={setAboutContent}
                     />
 
                     <Typography
@@ -257,29 +236,6 @@ export const BookForm = ({type , setSuccess , setError}) => {
                     setCValue={setCValue}
                     categorys={categorys}
                     setCategorys={setCategorys}/>
-                        
-                    <Typography
-                    sx={textStyle}
-                    >کتاب اصلی</Typography>
-                    <StyledTextField
-                    value={bookBuyLink}
-                    setValue={setBookBuyLink}/>
-
-                    <Typography
-                    sx={textStyle}
-                    >تویتر نویسنده کتاب</Typography>
-                    <StyledTextField
-                    value={authorTwitter}
-                    setValue={setAuthorTwitter}
-                    />
-
-                    <Typography
-                    sx={textStyle}
-                    >اینستاگرام نویسنده کتاب</Typography>
-                    <StyledTextField
-                    value={authorInstagram}
-                    setValue={setAuthorInstagram}
-                    />
 
                     <SubmitButton
                     disabled={disabled}
@@ -295,11 +251,7 @@ export const BookForm = ({type , setSuccess , setError}) => {
                             setError("اسم نویسنده کتاب را بنویسید")
                             return
                         }
-                        if(!contentCreator){
-                            setDisabled(false)
-                            setError("اسم نویسنده پست را بنویسید")
-                            return
-                        }
+                        
                         if(!bookContent){
                             setDisabled(false)
                             setError("متن کتاب را بنویسید")
@@ -310,11 +262,7 @@ export const BookForm = ({type , setSuccess , setError}) => {
                             setError("متنی درباره کتاب بنویسید")
                             return
                         }
-                        if(!aboutContent){
-                            setDisabled(false)
-                            setError("متنی درباره پست بنویسید")
-                            return
-                        }
+                        
                         if(!bookCover){
                             setDisabled(false)
                             setError("عکس کاور کتاب را آپلود کنید")
@@ -337,26 +285,42 @@ export const BookForm = ({type , setSuccess , setError}) => {
                         //     setError("لینک اینستاگرام نویسنده کتاب را وارد کنید")
                         //     return
                         // }
-                        axios.post("http://localhost:4000/requests",
-                        {
+                        // axios.post("http://localhost:4000/requests",
+                        // {
+                            // name : bookName,
+                            // author : bookAuthor,
+                            // about : aboutBook,
+                            // contentCreator : contentCreator,
+                            // aboutPost : aboutContent,
+                            // buyBook : bookBuyLink,
+                            // authorTwitter : authorTwitter,
+                            // authorInstagram : authorInstagram,
+                            // categorys : categorys,
+                            // cover : bookCover,
+                            // content : bookContent
+                        // })
+                        // .then( () => {
+                        // setSuccess("کتاب با موفقیت اضافه شد")
+                        // setDisabled(false)
+                        // })
+                        // .catch(err => {
+                        //     console.log(err)
+                        //     setDisabled(false)
+                        // })
+                        createBookDoc({
                             name : bookName,
                             author : bookAuthor,
                             about : aboutBook,
-                            contentCreator : contentCreator,
-                            aboutPost : aboutContent,
-                            buyBook : bookBuyLink,
-                            authorTwitter : authorTwitter,
-                            authorInstagram : authorInstagram,
                             categorys : categorys,
                             cover : bookCover,
                             content : bookContent
+                        },
+                        setError,
+                        setSuccess)
+                        .then(() => {
+                            setDisabled(false)
                         })
-                        .then( () => {
-                        setSuccess("کتاب با موفقیت اضافه شد")
-                        setDisabled(false)
-                        })
-                        .catch(err => {
-                            console.log(err)
+                        .catch(() => {
                             setDisabled(false)
                         })
                     }}

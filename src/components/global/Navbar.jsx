@@ -16,7 +16,6 @@ const Navbar = () => {
     const textFieldRef = useRef()
     const searchRef = useRef()
 
-    const { isAdmin } = useSelector(state => state.adminSlice);
     const { current } = useSelector(state => state.navbarSlice);
     const { user } = useSelector(state => state.authSlice);
 
@@ -36,7 +35,7 @@ const Navbar = () => {
         }
     },[search])
 
-    let dontShowIf = ["reader" , "book" , "admin"]
+    let dontShowIf = ["reader" , "book" , "signup" , "login"]
     if(dontShowIf.includes(current)) return ""
 
     return (
@@ -132,7 +131,6 @@ const Navbar = () => {
             </Fade>
 
             <Sidebar 
-            admin={isAdmin}
             showSidebar={showSidebar}
             setShowSidebar={setShowSidebar}
             type="mobile"/>
@@ -201,7 +199,6 @@ const Navbar = () => {
             </Box>
 
             <Sidebar 
-            admin={isAdmin}
             showSidebar={showSidebar}
             setShowSidebar={setShowSidebar}
             type="pc"/>

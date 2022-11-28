@@ -7,8 +7,11 @@ import {
   Navbar , Book , Home,
   Saved , Footer , Reader,
   Admin , Create , BackPack, 
-  EditBook , EditBanner , Requests
+  EditBook , EditBanner , Requests,
+  Login , Signup
 } from "./components/index";
+
+import ProtectUser from "./components/PrivateRoutes/PrivateUser";
 
 import axios from "axios"
 import { setBooks , setBanners } from "./redux/dataSlice";
@@ -53,22 +56,23 @@ function App() {
         error : "",
       }))
     });
-  })
+  },[])
 
   return(
     <Router>
       <Navbar/>
       <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/book/:id" element={<Book/>}/>
-          <Route path="/saved" element={<Saved/>}/>
-          <Route path="/reader/:id" element={<Reader/>}/>
-          <Route path="/admin" element={<Admin/>}/>
-          <Route path="/create" element={<Create/>}/>
-          <Route path="/backpack" element={<BackPack/>}/>
-          <Route path="/editbook" element={<EditBook/>}/>
-          <Route path="/editbanner" element={<EditBanner/>}/>
-          <Route path="/requests" element={<Requests/>}/>
+          <Route path="/" element={<ProtectUser><Home/></ProtectUser>}/>
+          <Route path="/book/:id" element={<ProtectUser><Book/></ProtectUser>}/>
+          <Route path="/saved" element={<ProtectUser><Saved/></ProtectUser>}/>
+          <Route path="/reader/:id" element={<ProtectUser><Reader/></ProtectUser>}/>
+          <Route path="/create" element={<ProtectUser><Create/></ProtectUser>}/>
+          <Route path="/backpack" element={<ProtectUser><BackPack/></ProtectUser>}/>
+          <Route path="/editbook" element={<ProtectUser><EditBook/></ProtectUser>}/>
+          <Route path="/editbanner" element={<ProtectUser><EditBanner/></ProtectUser>}/>
+          <Route path="/requests" element={<ProtectUser><Requests/></ProtectUser>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/signup" element={<Signup/>}/>
       </Routes>
       <Footer/>
     </Router>
