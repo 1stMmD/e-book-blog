@@ -7,7 +7,6 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useSelector } from 'react-redux';
-import { signOut } from '../../functions/auth';
 
 const Navbar = () => {
     const [search, setSearch] = useState(false);
@@ -82,18 +81,6 @@ const Navbar = () => {
                 </IconButton>
 
             </Fade>
-
-            {user ? 
-            <button
-            onClick={() => {
-                signOut()
-            }}
-            >
-                Sign out
-            </button>
-            :
-            ""
-            }
 
             <Collapse
             in={search}

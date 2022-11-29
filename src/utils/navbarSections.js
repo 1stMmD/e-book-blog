@@ -32,8 +32,8 @@ export const sidebarSections = [
     },
     {
         title : "پروفایل",
-        url : "/saved",
-        name: "saved" ,
+        url : "/profile",
+        name: "profile" ,
         icon : <PersonIcon sx={iconSX}/>,
         whiteIcon : <PersonIcon sx={whiteIconSX}/>,
         noMarginIcon : <PersonIcon sx={noMarginIconSX}/>,

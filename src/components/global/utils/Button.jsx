@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 
-const Button = ({children , onClick}) => {
+const Button = ({children , onClick , sx}) => {
     return(
         <Box
         onClick={onClick}
@@ -14,6 +14,7 @@ const Button = ({children , onClick}) => {
             boxShadow : "0 0 5px rgba(10,10,10,.2)",
             p : .5,
             cursor : "pointer",
+            ...sx
         }}>
             {children}
         </Box>

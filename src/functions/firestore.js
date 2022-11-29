@@ -9,7 +9,8 @@ import {
     doc,
     setDoc,
     addDoc,
-    serverTimestamp
+    serverTimestamp,
+    getDocs, where , query
 
 } from "firebase/firestore";
 
@@ -37,10 +38,9 @@ export const getUserDoc = async ({id , email , displayName}) => {
         await setDoc(docRef,{
             uid : id,
             email : email,
-            name : displayName || "user",
-            books : [],
-            savedBooks : [],
-            author : false
+            name : displayName || "User",
+            author : false,
+            admin : false
         })
     }
     catch(err){
@@ -50,7 +50,7 @@ export const getUserDoc = async ({id , email , displayName}) => {
     getUserDoc({id , email , displayName});
 }
 
-export const createBookDoc = ({
+export const createBookDoc = async ({
     name, author , 
     content, about,
     cover , categorys ,
@@ -74,4 +74,27 @@ export const createBookDoc = ({
     .catch((err) => {
         setError(err.name)
     })
+}
+
+export const getBooksByQuery = async (property , operator , value) => {
+    const q = query(books , where(property , operator , value));
+
+    try{
+        const snapshots = await getDocs(q);
+
+        if(!snapshots.docs[0]){
+            return []
+        }   
+        return snapshots.docs.map((item) => {
+            
+            return {
+                ...item.data(),
+                docId : item.id
+            }
+        })   
+        
+    }
+    catch(err){
+        throw new Error(err.name)
+    }
 }

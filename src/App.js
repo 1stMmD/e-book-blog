@@ -5,8 +5,8 @@ import {
 
 import {
   Navbar , Book , Home,
-  Saved , Footer , Reader,
-  Admin , Create , BackPack, 
+  Profile , Footer , Reader,
+   Create , BackPack, 
   EditBook , EditBanner , Requests,
   Login , Signup
 } from "./components/index";
@@ -64,7 +64,7 @@ function App() {
       <Routes>
           <Route path="/" element={<ProtectUser><Home/></ProtectUser>}/>
           <Route path="/book/:id" element={<ProtectUser><Book/></ProtectUser>}/>
-          <Route path="/saved" element={<ProtectUser><Saved/></ProtectUser>}/>
+          <Route path="/profile" element={<ProtectUser><Profile/></ProtectUser>}/>
           <Route path="/reader/:id" element={<ProtectUser><Reader/></ProtectUser>}/>
           <Route path="/create" element={<ProtectUser><Create/></ProtectUser>}/>
           <Route path="/backpack" element={<ProtectUser><BackPack/></ProtectUser>}/>

@@ -6,7 +6,7 @@ export { default as BookRef} from "./global/BookRef";
 export { default as BannerRef} from "./global/BannerRef";
 export { default as Books} from "./Books";
 export { default as Book} from "./Pages/Book";
-export { default as Saved} from "./Pages/Saved";
+export { default as Profile} from "./Pages/Profile";
 export {default as SavedBook} from "./global/SavedBook";
 export {default as Progress} from "./global/Progress";
 export {default as Footer} from "./global/Footer";
