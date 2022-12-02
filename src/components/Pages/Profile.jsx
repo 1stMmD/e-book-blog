@@ -12,21 +12,26 @@ import ConfirmDeletePopup from '../global/popup/ConfirmDeletePopup';
 import { signOut } from '../../functions/auth';
 import useGetBooksByQuery from '../../hooks/useGetBooksByQuery';
 import Preview from '../global/utils/Preview';
+import { useNavigate } from 'react-router-dom';
+import useCheckRequest from '../../hooks/useCheckRequest';
+import { addRequest } from '../../functions/firestore';
 
 const Profile = () => {
 
-    const [show , setShow] = useState(false)
+    const [disableButton , setDisableButton] = useState(false)
+
+    const navigate = useNavigate()
     const [docId , setDocId] = useState("")
-
     const { user } = useSelector(state => state.authSlice);
-
+    
     const dispatch = useDispatch();
     
     const {data , pending , error} = useGetBooksByQuery("createdBy" , "==" , user.uid)
-
+    const {sended , pending: Spending , error:Serror} = useCheckRequest(user?.uid)
+    
     React.useEffect(() => {
         dispatch(changeCurrent("profile"))
-    },[])
+    },[dispatch])
 
     return (
         <>
@@ -66,7 +71,8 @@ const Profile = () => {
                          border : "2px solid",
                          borderColor : "white.main",
                          boxShadow : "",
-                         p : .8
+                         p : .8,
+                         zIndex : "1"
                     }}>
                         <LogoutIcon
                         sx={{
@@ -107,15 +113,17 @@ const Profile = () => {
                         xl : 4,
                     }
                 }}/>
-                
+
+                { (user?.author === false || data?.length === 0)&&
                 <Box
                 sx={{
                     display : "grid",
                     width : "80%",
                     justifyContent : "center",
                 }}>
-                    {!user?.author && 
-                        <Box
+
+                        { user?.author === false &&
+                            <Box
                         sx={{
                             display : "grid",
                             placeItems : "center"
@@ -129,7 +137,83 @@ const Profile = () => {
                             >
                                 درخواست برای نویسندگی
                             </Typography>
+
+                            {sended === false && !Serror &&
+                                <Button
+                                onClick={ async () => {
+                                    setDisableButton(true)
+                                    try{
+                                        await addRequest(user?.uid , user?.email)
+                                        setDisableButton(false)
+                                    }
+                                    catch(err){
+                                        console.log(err)
+                                        setDisableButton(false)
+                                    }
+                                }}
+                                sx={{
+                                    pointerEvents : disableButton ? "none" : "default",
+                                    borderRadius : "500px",
+                                    px : 2,
+                                    bgcolor :disableButton ? "gray.main" : "primary.main",
+                                }}>
+                                    <Typography
+                                    sx={{
+                                        color : disableButton ? "black.main" : "white.main",
+                                        fontSize : "14px",
+                                        fontWeight : "500"
+                                    }}
+                                    >
+                                        ارسال
+                                    </Typography>
+                                </Button>
+                            }
+
+                            {sended &&
+                                <Button
+                                onClick={() => {
+                                    addRequest(user?.uid , user?.email)
+                                }}
+                                sx={{
+                                    pointerEvents : sended ? "none" : "",
+                                    borderRadius : "500px",
+                                    px : 2,
+                                    bgcolor : sended ? "" : "primary.main",
+                                }}>
+                                    <Typography
+                                    sx={{
+                                        color : sended ? "black.main" : "white.main",
+                                        fontSize : "14px",
+                                        fontWeight : "500"
+                                    }}
+                                    >
+                                        { sended ? "ارسال شده" : "ارسال" }
+                                    </Typography>
+                                </Button>
+                            }
+
+                            </Box>
+                        }
+
+                        { (!pending && user?.author === true && data?.length === 0) &&
+                            <Box
+                            sx={{
+                                display : "grid",
+                                placeItems : "center"
+                            }}>
+                            <Typography
+                            sx={{
+                                color : "black.main",
+                                fontSize : "1rem",
+                                mb : 1
+                            }}
+                            >
+                                شما فعلا کتابی ننوشته اید
+                            </Typography>
                             <Button
+                            onClick={() => {
+                                navigate("/create")
+                            }}
                             sx={{
                                 borderRadius : "500px",
                                 px : 2,
@@ -141,26 +225,54 @@ const Profile = () => {
                                     fontWeight : "500"
                                 }}
                                 >
-                                    ارسال
+                                    کتاب جدید
                                 </Typography>
                             </Button>
-                        </Box>
-                    }
-
-                    { !pending && !error &&
-                        data?.map((item , idx) => {
+                            </Box>
+                        }
+                    
+                </Box>
+                }
+                
+                { !pending && !error &&
+                <Box
+                sx={{
+                    display : "grid",
+                    width : "80%",
+                    justifyContent : "center",
+                    gridTemplateColumns :{ 
+                        xs :"repeat(auto-fit,minmax(100px,1fr))",
+                        md :"repeat(auto-fit,minmax(125px,1fr))",
+                        lg :"repeat(auto-fit,minmax(165px,1fr))",
+                        xl :"repeat(auto-fit,minmax(220px,1fr))",
+                    },
+                    placeItems : "center",
+                    rowGap : 2,
+                }}>
+                        {data?.map((item , idx) => {
                             return(
                                 <Preview
+                                cover={item.cover}
+                                key={idx}
+                                onDelete={() => {
+                                    setDocId(item.docId)
+                                }}
+                                bookId={item.docId}
                                 type="book"/>
                             )
-                        })
-                    }
+                        })}
                 </Box>
+                }
 
             </Box>
             
         </Box>
-        <ConfirmDeletePopup/>
+
+        <ConfirmDeletePopup
+        docId={docId}
+        setDocId={setDocId}
+        />
+
         </>
     );
 }

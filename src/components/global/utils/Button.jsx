@@ -14,6 +14,8 @@ const Button = ({children , onClick , sx}) => {
             boxShadow : "0 0 5px rgba(10,10,10,.2)",
             p : .5,
             cursor : "pointer",
+            boxShadow : "0 0 6px rgba(5,5,5,.15)",
+            transition : "background-color 300ms",
             ...sx
         }}>
             {children}

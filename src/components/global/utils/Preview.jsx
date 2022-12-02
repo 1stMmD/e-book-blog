@@ -6,7 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Link } from "react-router-dom"
 import Button from "./Button";
 
-const Preview = ({type}) => {
+const Preview = ({type , onDelete , cover , bookId}) => {
     return (
         <Box
         sx={{
@@ -39,6 +39,10 @@ const Preview = ({type}) => {
                         xl : "18px"
                     },
                     bgcolor : "gray.main",
+                    backgroundImage : `url(${cover})`,
+                    backgroundSize : "cover",
+                    backgroundPosition : "center",
+                    boxShadow : "0 2px 8px rgba(5,5,5,.15)"
                 }}/>
 
                 <Box
@@ -52,7 +56,8 @@ const Preview = ({type}) => {
                 }
                 }}>
 
-                    <Button>
+                    <Button
+                    onClick={onDelete}>
                         <DeleteIcon
                         sx={{
                             color : "white.main",
@@ -67,7 +72,7 @@ const Preview = ({type}) => {
                     </Button>
                     
                     <Link
-                    to="/admin/editbook">
+                    to={`/editbook/${bookId}`}>
                         <Button>
                             <EditIcon
                             sx={{

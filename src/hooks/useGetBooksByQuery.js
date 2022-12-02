@@ -1,4 +1,4 @@
-import { useState , useEffect } from "react"
+import { useState , useEffect , useRef} from "react"
 import { getBooksByQuery } from "../functions/firestore"
 
 const useGetBooksByQuery = (property , operator , value) => {
@@ -7,23 +7,9 @@ const useGetBooksByQuery = (property , operator , value) => {
     const [error , setError] = useState(null);
 
     useEffect(() => {
-        const func = async () => {
-            setPending(true)
-            setError("")
-            setData([])
-            try{
-                const arr = await getBooksByQuery(property , operator , value);
-                setData(arr)
-                setPending(false)
-                setError("")
-            }
-            catch(err){
-                setData([])
-                setPending(false)
-                setError(err.toString())
-            }
-        }
-        func()
+        const unsubscribe = getBooksByQuery(
+            property , operator , value , setData , setPending, setError
+        )
     },[property , operator , value])
 
     return { data , pending , error }

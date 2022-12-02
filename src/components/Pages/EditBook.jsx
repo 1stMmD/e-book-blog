@@ -3,13 +3,13 @@ import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 
 import { BookForm } from "../global/utils/Forms";
-import { useNavigate } from "react-router-dom"
-
+import { useNavigate , useParams } from "react-router-dom"
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 
 const EditBook = () => {
 
     const navigate = useNavigate();
+    const { bookId } = useParams()
 
     return (
         <Box
@@ -42,7 +42,8 @@ const EditBook = () => {
                 </IconButton>
             </Box>
 
-            <BookForm/>
+            <BookForm
+            bookId={bookId}/>
             
         </Box>
     );

@@ -1,4 +1,4 @@
-import React , { useState } from 'react';
+import React , { useState , useEffect} from 'react';
 import axios from "axios";
 
 import Box from "@mui/material/Box";
@@ -7,7 +7,8 @@ import Typography from '@mui/material/Typography';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 import CategoryInput from '../../global/CategoryInput';
-import { createBookDoc } from '../../../functions/firestore';
+import { createBookDoc, updateBook , getBook} from '../../../functions/firestore';
+import { AssignmentReturnOutlined } from '@mui/icons-material';
 
 const textStyle = {
     fontSize : {
@@ -53,7 +54,7 @@ return(<Box
         mb : 2 ,
         borderColor : "gray.dark",
         borderRadius : "3px",
-        fontFamily : "inherit",
+        fontFamily : (theme) => theme.typography.fontFamily,
         "&:focus" : {
         outlineColor : (theme) => theme.palette.primary.main,
 
@@ -61,7 +62,7 @@ return(<Box
     }}/>)
 }
 
-const SubmitButton = ({onClick , disabled}) => {
+const SubmitButton = ({onClick , disabled , text = "تایید"}) => {
 return(
     <Box
     onClick={onClick}
@@ -106,7 +107,7 @@ return(
                 lg : "1.3rem",
             },
         }}>
-            تایید
+            {text}
         </Typography>
     </Box>
 )
@@ -137,11 +138,41 @@ const FileForm = ({type , value , setValue}) => {
                 htmlFor="file"
                 sx={{
                     display : "flex",
-                    minWidth : type === "book" ? "78px" : "min(400px,80vw)",
-                    minHeight : type === "book" ? "113px" : "min(200px,40vw)",
-                    maxWidth : type === "book" ? "78px" : "80vw",
-                    maxHeight : type === "book" ? "113px" : "40vw",
-                    borderRadius : type === "book" ? "9px" : 
+                    minWidth : type === "book" ? 
+                    {
+                        xs : "80px",
+                        md : "100px",
+                        lg : "140px",
+                        xl : "180px",
+                    } : "min(400px,80vw)",
+                    minHeight : type === "book" ?
+                    {
+                        xs :"120px",
+                        md : "150px",
+                        lg: "210px",
+                        xl : "270px",
+                    } : "min(200px,40vw)",
+                    maxWidth : type === "book" ?
+                    {
+                        xs : "80px",
+                        md : "100px",
+                        lg : "140px",
+                        xl : "180px",
+                    } : "80vw",
+                    maxHeight : type === "book" ?
+                    {
+                        xs :"120px",
+                        md : "150px",
+                        lg: "210px",
+                        xl : "270px",
+                    } : "40vw",
+                    borderRadius : type === "book"?
+                    {
+                        xs : "9px",
+                        md : "13px",
+                        lg : "14px",
+                        xl : "18px"
+                    } : 
                     {
                         xs : "9px",
                         md : "12px",
@@ -165,8 +196,11 @@ const FileForm = ({type , value , setValue}) => {
     )
 }
 
-export const BookForm = ({type , setSuccess , setError}) => {
+export const BookForm = ({
+     setSuccess , setError, bookId    
+}) => {
 
+    const [pending , setPending] = useState(false)
     const [cValue , setCValue] = useState("")
     const [categorys , setCategorys] = useState([])
     const [bookName , setBookName] = useState("")
@@ -175,6 +209,27 @@ export const BookForm = ({type , setSuccess , setError}) => {
     const [bookContent , setBookContent] = useState("")
     const [bookCover , setBookCover] = useState("")
     const [disabled , setDisabled] = useState(false)
+
+    useEffect(() => {
+        if(bookId){
+            setPending(true)
+            getBook(bookId)
+            .then(value => {
+                setBookName(value.name);
+                setBookAuthor(value.author);
+                setAboutBook(value.about);
+                setBookContent(value.content);
+                setBookCover(value.cover);
+                setCategorys(value.categorys);
+                setPending(false)
+            })
+        }
+    },[])
+    if(pending){
+        return(
+            <div>Loading...</div>
+        )
+    }
 
     return (
             
@@ -238,6 +293,7 @@ export const BookForm = ({type , setSuccess , setError}) => {
                     setCategorys={setCategorys}/>
 
                     <SubmitButton
+                    text={bookId && "بروزرسانی"}
                     disabled={disabled}
                     onClick={() => {
                         setDisabled(true)
@@ -273,57 +329,48 @@ export const BookForm = ({type , setSuccess , setError}) => {
                             setError("حداقل یک دسته بندی بنویسید")
                             return
                         }
-                        // if(!bookBuyLink){
-                        //     setError("لینک خرید کتاب را بنویسید")
-                        //     return
-                        // }
-                        // if(!authorTwitter){
-                        //     setError("لینک تویتر نویسنده کتاب را وارد کنید")
-                        //     return
-                        // }
-                        // if(!authorInstagram){
-                        //     setError("لینک اینستاگرام نویسنده کتاب را وارد کنید")
-                        //     return
-                        // }
-                        // axios.post("http://localhost:4000/requests",
-                        // {
-                            // name : bookName,
-                            // author : bookAuthor,
-                            // about : aboutBook,
-                            // contentCreator : contentCreator,
-                            // aboutPost : aboutContent,
-                            // buyBook : bookBuyLink,
-                            // authorTwitter : authorTwitter,
-                            // authorInstagram : authorInstagram,
-                            // categorys : categorys,
-                            // cover : bookCover,
-                            // content : bookContent
-                        // })
-                        // .then( () => {
-                        // setSuccess("کتاب با موفقیت اضافه شد")
-                        // setDisabled(false)
-                        // })
-                        // .catch(err => {
-                        //     console.log(err)
-                        //     setDisabled(false)
-                        // })
-                        createBookDoc({
-                            name : bookName,
-                            author : bookAuthor,
-                            about : aboutBook,
-                            categorys : categorys,
-                            cover : bookCover,
-                            content : bookContent
-                        },
-                        setError,
-                        setSuccess)
-                        .then(() => {
-                            setDisabled(false)
-                        })
-                        .catch(() => {
-                            setDisabled(false)
-                        })
-                    }}
+                        if(!bookId){
+                            createBookDoc({
+                                name : bookName,
+                                author : bookAuthor,
+                                about : aboutBook,
+                                categorys : categorys,
+                                cover : bookCover,
+                                content : bookContent
+                            },
+                            setError,
+                            setSuccess)
+                            .then(() => {
+                                setDisabled(false)
+                            })
+                            .catch(() => {
+                                setDisabled(false)
+                            })
+                            console.log("add")
+                            return
+                        }
+                        if(bookId){
+                            updateBook(bookId , {
+                                name : bookName,
+                                author : bookAuthor,
+                                about : aboutBook,
+                                categorys : categorys,
+                                cover : bookCover,
+                                content : bookContent
+                            },
+                            setError,
+                            setSuccess)
+                            .then(() => {
+                                setDisabled(false)
+                            })
+                            .catch(() => {
+                                setDisabled(false)
+                            })
+                            console.log("update")
+                            return
+                        }
+                      }
+                    }
                     />
 
                 </Box>

@@ -1,8 +1,17 @@
+import { useState } from "react";
+
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import CloseIcon from '@mui/icons-material/Close';
+import PopupButton from "./PopupButton";
 
-const ConfirmPopupDelete = () => {
+import { deleteBook } from "../../../functions/firestore";
+
+const ConfirmPopupDelete = ({docId , setDocId}) => {
+
+    const [disable , setDisable] = useState(false)
+
     return (
         <Box
         sx={{
@@ -13,17 +22,37 @@ const ConfirmPopupDelete = () => {
             left : "0",
             bgcolor : "rgba(20,20,20,.2)",
             zIndex : "10",
-            display : "grid",
+            display : docId ? "grid" : "none",
             placeItems : "center"
         }}>
             <Box
             sx={{
-                width : "min(300px,80vw)",
+                width : "min(240px,80vw)",
                 bgcolor : "white.main",
                 display : "flex",
                 flexDirection : "column",
-                alignItems : "center"
+                alignItems : "center",
+                borderRadius : "12px"
             }}>
+
+                <Box
+                sx={{
+                    display : "flex",
+                    width : "100%",
+                    justifyContent : "end",
+                }}>
+                    <CloseIcon
+                    onClick={() => {
+                        setDocId("")
+                    }}
+                    sx={{
+                        mt : 1,
+                        mr : 1,
+                        color : "black.main",
+                        cursor : "pointer"
+                    }}/>
+                </Box>
+
                 <Box
                 sx={{
                     bgcolor : "error.main",
@@ -31,20 +60,21 @@ const ConfirmPopupDelete = () => {
                     borderRadius : "50%",
                     display : "grid",
                     placeItems : "center",
-                    my : 2
+                    mt : 1,
+                    mb : 2,
                 }}>
 
                     <DeleteForeverIcon
                     sx={{
                         color : "white.main",
-                        fontSize : "3rem",
+                        fontSize : "3.5rem",
                     }}/>
 
                 </Box>
 
                 <Typography
                 sx={{
-                    fontSize : "1.2rem",
+                    fontSize : "1rem",
                     fontWeight : "600",
                     color : "black.dark",
                 }}>
@@ -53,13 +83,58 @@ const ConfirmPopupDelete = () => {
 
                 <Typography
                 sx={{
-                    fontSize : ".9rem",
+                    my : .5,
+                    fontSize : ".8rem",
                     color : "black.light",
                     width : "80%",
                     textAlign : "center"
                 }}>
                     در صورت حذف شدن کتاب بازگردانی آن امکان پذیر نمی باشد
                 </Typography>
+
+                <Box
+                sx={{
+                    mt : 2,
+                    mb : 4,
+                    display : "grid",
+                    width : "min(250px,90%)",
+                    placeItems : "center",
+                    justifyContent : "center",
+                    gridTemplateColumns : "repeat(auto-fit , 80px)",
+                    rowGap : 1
+                }}>
+                    <PopupButton
+                    onClick={ async () => {
+                        setDisable(true)
+                        try{
+                            await deleteBook(docId , setDocId);
+                            setDisable(false)
+                        }
+                        catch(err){
+                            console.log(err.toString())
+                            setDisable(false)
+                        }
+                        
+                    }}
+                    text="تایید"
+                    bsx={{
+                        pointerEvents : disable && "none",
+                    }}
+                    />
+                    <PopupButton
+                    onClick={() => {
+                        setDocId("")
+                    }}
+                    psx={{
+                        color : "error.main",
+                    }}
+                    bsx={{
+                        bgcolor : "transparent"
+                    }}
+                    text="لغو"
+                    />
+                </Box>
+
             </Box>
         </Box>
     );

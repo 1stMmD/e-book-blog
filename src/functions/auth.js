@@ -37,8 +37,6 @@ export const handleAuthChanges = () => {
             email : user.email,
             uid : user.uid
         }));
-
-        console.log(user.displayName + " is online")
     })
 
     return unsubscribe

@@ -15,13 +15,13 @@ import ProtectUser from "./components/PrivateRoutes/PrivateUser";
 
 import axios from "axios"
 import { setBooks , setBanners } from "./redux/dataSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector } from "react-redux";
 
 import { handleAuthChanges } from "./functions/auth";
 
 function App() {
   const dispatch = useDispatch()
-
+  const { user } = useSelector(state => state.authSlice)
   useEffect(() => {
     const unsubscribe = handleAuthChanges();
 
@@ -58,6 +58,12 @@ function App() {
     });
   },[])
 
+  if(user === undefined){
+    return(
+      <div>loading...</div>
+    )
+  }
+
   return(
     <Router>
       <Navbar/>
@@ -68,7 +74,7 @@ function App() {
           <Route path="/reader/:id" element={<ProtectUser><Reader/></ProtectUser>}/>
           <Route path="/create" element={<ProtectUser><Create/></ProtectUser>}/>
           <Route path="/backpack" element={<ProtectUser><BackPack/></ProtectUser>}/>
-          <Route path="/editbook" element={<ProtectUser><EditBook/></ProtectUser>}/>
+          <Route path="/editbook/:bookId" element={<ProtectUser><EditBook/></ProtectUser>}/>
           <Route path="/editbanner" element={<ProtectUser><EditBanner/></ProtectUser>}/>
           <Route path="/requests" element={<ProtectUser><Requests/></ProtectUser>}/>
           <Route path="/login" element={<Login/>}/>
