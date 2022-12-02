@@ -42,7 +42,7 @@ export const handleAuthChanges = () => {
     return unsubscribe
 }
 
-export const signupWithEmail = (email , password) => {
+export const signupWithEmail = (email , password , setError) => {
     createUserWithEmailAndPassword(auth , email , password)
     .then(() => {
         console.log("signed in")
@@ -50,6 +50,7 @@ export const signupWithEmail = (email , password) => {
     })
     .catch((err) => {
         console.log(err)
+        setError(err.toString())
     })
 }
 

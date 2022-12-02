@@ -18,6 +18,7 @@ import { signInWithGoogle } from '../../functions/auth';
 import { signupWithEmail } from '../../functions/auth';
 import { useDispatch } from 'react-redux';
 import { changeCurrent } from '../../redux/navbarSlice';
+import ErrorBox from "../global/ErrorBox";
 
 const Signup = () => {
 
@@ -27,6 +28,7 @@ const Signup = () => {
     const [password , setPassword] = useState("")
     const [confirmPassword , setConfirmPassword] = useState("")
     const [dontShowPassword , setDontShowPassword] = useState(true)
+    const [error , setError] = useState("")
 
     useEffect(() => {
         dispatch(changeCurrent("signup"))
@@ -76,7 +78,9 @@ const Signup = () => {
                     console.log("passwords doesn't match")
                     return
                 }
-                signupWithEmail(email , password)
+
+                signupWithEmail(email , password , setError)
+                
             }}
             component="form"
             sx={{
@@ -144,6 +148,12 @@ const Signup = () => {
                 </Link>
 
             </Box>
+
+            <ErrorBox
+            Error={error}
+            SetError={setError}
+            />
+
         </Box>
     );
 }
