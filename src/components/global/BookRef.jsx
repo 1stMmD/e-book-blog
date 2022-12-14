@@ -1,9 +1,13 @@
 import Box from "@mui/material/Box";
 import Paper  from "@mui/material/Paper";
 import Typography  from "@mui/material/Typography";
-import { Link } from "react-router-dom"
-
-const BookRef = ({name , author , cover , bookID}) => {
+import { setBook } from "../../redux/bookSlice";
+import { useDispatch
+ } from "react-redux";
+const BookRef = ({name , author , cover , bookId , book}) => {
+    
+    const dispatch = useDispatch()
+    
     return (
             <Box
             onDragStart={(e) => {
@@ -16,46 +20,47 @@ const BookRef = ({name , author , cover , bookID}) => {
                 width:"fit-content",
                 scrollSnapAlign:"start",
             }}>
-
-                <Link
-                to={`/book/${bookID}`}
-                >
                     <Paper
+                    onClick={() => {
+                        dispatch(setBook(bookId))
+                    }}
                     elevation={0}
                     sx={{
                         width : {
                             xs : "80px",
-                            md : "100px",
-                            lg : "140px",
-                            xl : "180px",
+                            md : "90px",
+                            lg : "100px",
+                            xl : 110
                         } ,
                         height : {
                             xs :"120px",
-                            md : "150px",
-                            lg: "210px",
-                            xl : "270px",
+                            md : "135px",
+                            lg : 150,
+                            xl : 165
                         },
                         bgcolor : "#e1e1e1",
                         borderRadius : {
-                            xs : "7px",
-                            md : "10px",
-                            lg : "12px",
-                            xl : "15px"
+                            xs : "4px",
+                            md : "4px",
+                            lg : "4px",
+                            xl : "6px"
                         },
                         backgroundImage : `url(${cover})`,
                         backgroundSize : "cover",
                         cursor : "pointer",
-                        boxShadow: "0 0 5px rgba(0,0,0,.2)",
+                        boxShadow: "0 3px 6px 0 rgba(0,0,0,.16)",
                         mb:1,
+                        "&:hover" : {
+                            boxShadow: "0 6px 6px 0 rgba(0,0,0,.32)",
+                        }
                     }}/>
-                </Link>
                 
                 <Typography
                 variant="body2"
                 sx={{
                     fontSize : {
-                        xs : ".7rem",
-                        lg : "1rem"
+                        xs : ".75rem",
+                        lg : ".75rem"
                     },
                     maxWidth: "78px",
                     overflow : "hidden",
@@ -71,14 +76,14 @@ const BookRef = ({name , author , cover , bookID}) => {
                 variant="body2"
                 sx={{
                     fontSize : {
-                        xs : ".6rem",
-                        lg : ".9rem"
+                        xs : ".75rem",
+                        lg : ".75rem"
                     },
                     maxWidth: "78px",
                     overflow : "hidden",
                     whiteSpace : "nowrap",
                     textOverflow : "ellipsis",
-                    color : "black.main",
+                    color : "black.light",
                 }}>
                     {author ? author : "..."}
                 </Typography>

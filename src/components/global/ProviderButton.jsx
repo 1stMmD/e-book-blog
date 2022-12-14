@@ -17,7 +17,7 @@ const ProviderButton = ({
             alignItems : "center",
             gap : 1,
             width : "100%",
-            bgcolor : "white.main",
+            bgcolor : "black.main",
             border : "none",
             borderRadius : "5px",
             boxShadow : "0 0 15px rgba(5,5,5,.15)",
@@ -26,14 +26,14 @@ const ProviderButton = ({
             {
                 <Box
                 sx={{
-                    color : "black.main"
+                    color : "white.main"
                 }}>
                     {icon}
                 </Box>
             }
             <Typography
             sx={{
-                color : "black.main",
+                color : "white.main",
                 fontFamily : "roboto",
             }}>
                 {text}

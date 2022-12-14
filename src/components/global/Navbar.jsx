@@ -56,6 +56,41 @@ const Navbar = () => {
         }}>
 
             <Fade in={!search}>
+                <IconButton
+                sx={buttonSX}
+                onClick={() => {
+                    setShowSidebar(true);
+                }}>
+                    <MenuIcon
+                    sx={iconButtonSX}/>
+                </IconButton>
+            </Fade>
+
+            <Collapse
+            in={search}
+            >
+                <form
+                style={{
+                    display : search ? "block" : "none"
+                }}>
+                    <TextField
+                    ref={textFieldRef}
+                    onBlur={(e) => {
+                        if(e.target.value === "" || e.target.value === "" ) setSearch(false)
+                    }}
+                    dir="ltr"
+                    variant="standard"
+                    sx={{
+                        height: "30px",
+                        p: "0px",
+                        width : "90vw",
+                        transition : "all 500ms"
+                    }}
+                    />
+                </form>
+            </Collapse>
+
+            <Fade in={!search}>
 
                 <IconButton
                 ref={searchRef}
@@ -82,41 +117,6 @@ const Navbar = () => {
 
             </Fade>
 
-            <Collapse
-            in={search}
-            >
-                <form
-                style={{
-                    display : search ? "block" : "none"
-                }}>
-                    <TextField
-                    ref={textFieldRef}
-                    onBlur={(e) => {
-                        if(e.target.value === "" || e.target.value === "" ) setSearch(false)
-                    }}
-                    dir="rtl"
-                    variant="standard"
-                    sx={{
-                        height: "30px",
-                        p: "0px",
-                        width : "90vw",
-                        transition : "all 500ms"
-                    }}
-                    />
-                </form>
-            </Collapse>
-
-            <Fade in={!search}>
-                <IconButton
-                sx={buttonSX}
-                onClick={() => {
-                    setShowSidebar(true);
-                }}>
-                    <MenuIcon
-                    sx={iconButtonSX}/>
-                </IconButton>
-            </Fade>
-
             <Sidebar 
             showSidebar={showSidebar}
             setShowSidebar={setShowSidebar}
@@ -135,13 +135,14 @@ const Navbar = () => {
                 xs : "none",
                 lg : "flex",
             },
+            flexDirection : "row-reverse",
             justifyContent : "space-evenly",
             alignItems : "center",
             bgcolor:"#ffffff",
         }}>
 
             <Box
-            dir="rtl"
+            dir="ltr"
             component="form"
             sx={{
                 display : {
@@ -153,6 +154,7 @@ const Navbar = () => {
 
                 <TextField
                 sx={{
+                    mx : 1,
                     "div" : {
                         borderRadius:"100px",
                     },

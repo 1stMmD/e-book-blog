@@ -1,14 +1,18 @@
 export const categorys = [
     {
-        title : "جدید ترین کتاب ها",
+        title : "Books added recently",
         category : "new"
     },
     {
-        title : "کتاب های انگیزشی",
+        title : "Best motivationals books",
         category : "انگیزشی"
     },
     {
-        title : "جدید ترین ناول ها",
+        title : "Don't miss reading these books!",
         category : "ناول"
+    },
+    {
+        title : "Most read in novels",
+        category : "novel"
     }
 ]

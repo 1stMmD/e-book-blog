@@ -7,11 +7,12 @@ import {
   Navbar , Book , Home,
   Profile , Footer , Reader,
    Create , BackPack, 
-  EditBook , EditBanner , Requests,
-  Login , Signup
+  EditBook , EditBanner ,
+  Login , Signup, BookPopup , Search
 } from "./components/index";
 
 import ProtectUser from "./components/PrivateRoutes/PrivateUser";
+import PrivateNoUser from "./components/PrivateRoutes/PrivateNoUser";
 
 import axios from "axios"
 import { setBooks , setBanners } from "./redux/dataSlice";
@@ -74,12 +75,13 @@ function App() {
           <Route path="/reader/:id" element={<ProtectUser><Reader/></ProtectUser>}/>
           <Route path="/create" element={<ProtectUser><Create/></ProtectUser>}/>
           <Route path="/backpack" element={<ProtectUser><BackPack/></ProtectUser>}/>
+          <Route path="/search" element={<ProtectUser><Search/></ProtectUser>}/>
           <Route path="/editbook/:bookId" element={<ProtectUser><EditBook/></ProtectUser>}/>
           <Route path="/editbanner" element={<ProtectUser><EditBanner/></ProtectUser>}/>
-          <Route path="/requests" element={<ProtectUser><Requests/></ProtectUser>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/signup" element={<Signup/>}/>
+          <Route path="/login" element={<PrivateNoUser><Login/></PrivateNoUser>}/>
+          <Route path="/signup" element={<PrivateNoUser><Signup/></PrivateNoUser>}/>
       </Routes>
+      <BookPopup/>
       <Footer/>
     </Router>
   );

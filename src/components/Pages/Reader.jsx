@@ -23,7 +23,7 @@ const Reader = () => {
 
     const dispatch = useDispatch()
 
-    const [current , setCurrent] = useState(JSON.parse(localStorage.getItem(`current`)) || 1);
+    const [current , setCurrent] = useState(1);
     const [nextPossible , setNextPossible] = useState(true);
     const [previusPossible , setPreviusPossible] = useState(true);
     const [currentPage , setCurrentPage] = useState([])
@@ -157,7 +157,7 @@ const Reader = () => {
             }}>
 
                 {currentPage.map((item , idx) => {
-                    if(item === "☻") return <br key={idx}/>
+                    if(item === "☻") return
                     return <Typography
                             key={idx}
                             sx={{

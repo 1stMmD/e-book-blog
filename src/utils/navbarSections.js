@@ -23,7 +23,7 @@ const noMarginIconSX = {
 
 export const sidebarSections = [
     {
-        title:"صفحه اصلی",
+        title:"Home",
         url : "/",
         name : "home" ,
         icon : <HomeIcon sx={iconSX}/>,
@@ -31,42 +31,32 @@ export const sidebarSections = [
         noMarginIcon : <HomeIcon sx={noMarginIconSX}/>,
     },
     {
-        title : "پروفایل",
+        title : "Profile",
         url : "/profile",
         name: "profile" ,
         icon : <PersonIcon sx={iconSX}/>,
         whiteIcon : <PersonIcon sx={whiteIconSX}/>,
         noMarginIcon : <PersonIcon sx={noMarginIconSX}/>,
-    }
-];
-
-export const authorSidebar = [
+    },
     {
-        title:"پست جدید",
+        title:"Create",
         url : "/create",
         name : "create" ,
         icon : <AddIcon sx={iconSX}/>,
         whiteIcon : <AddIcon sx={whiteIconSX}/>,
         noMarginIcon : <AddIcon sx={noMarginIconSX}/>,
     }
-]
+];
+
+
 
 export const adminSidebar = [
     {
-        title : "کوله",
+        title : "Backpack",
         url : "/backpack",
         name: "backpack" ,
         icon : <BackpackIcon sx={iconSX}/>,
         whiteIcon : <BackpackIcon sx={whiteIconSX}/>,
         noMarginIcon : <BackpackIcon sx={noMarginIconSX}/>,
-    },
-    {
-        title : "درخواست ها",
-        url : "/requests",
-        name: "requests" ,
-        icon : <PlaylistAddCheckIcon sx={iconSX}/>,
-        whiteIcon : <PlaylistAddCheckIcon sx={whiteIconSX}/>,
-        noMarginIcon : <PlaylistAddCheckIcon sx={noMarginIconSX}/>,
-    },
-    
+    }
 ]

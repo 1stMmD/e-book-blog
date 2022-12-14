@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import SMButton from "./SMButton";
 import { useSelector } from "react-redux"
 
@@ -13,7 +14,7 @@ const Toggle = ({section , setSection}) => {
                     lg : 1
                 },
                 width : "80%",
-                display : "flex",
+                display : user.admin ? "flex" : "none",
                 gap : 4,
                 p : 1,
                 justifyContent : "center",
@@ -29,7 +30,16 @@ const Toggle = ({section , setSection}) => {
                 Bcolor="#AE4BDD"
                 disable={section === "book"}
                 >
-                    کتاب
+                    <Typography
+                    sx={{
+                        textTransform : "none",
+                        fontSize : {
+                            xs : ".9rem",
+                            lg : "1.2rem"
+                        }
+                    }}>
+                        Book
+                    </Typography>
                 </SMButton>
 
                 { user?.admin ?
@@ -42,7 +52,16 @@ const Toggle = ({section , setSection}) => {
                 Bcolor="#AE4BDD"
                 disable={section === "banner"}
                 >
-                    بنر
+                    <Typography
+                    sx={{
+                        textTransform : "none",
+                        fontSize : {
+                            xs : ".9rem",
+                            lg : "1.2rem"
+                        }
+                    }}>
+                        Banner
+                    </Typography>
                 </SMButton>
                 :
                 ""
@@ -53,7 +72,7 @@ const Toggle = ({section , setSection}) => {
             
             <Box
             sx={{
-                display : "block",
+                display : user.admin ? "block" : "none",
                 width :"min(700px,70%)",
                 height : "1px",
                 bgcolor : "gray.dark",

@@ -2,14 +2,15 @@ import { createTheme , ThemeProvider } from "@mui/material";
 const custom = createTheme({
     typography:{
         fontFamily : [
-            "YekanBakh"
-        ].join("")
+            "roboto",
+            "YekanBakh",
+        ].join(",")
     },
     palette:{
        black:{
         light : "#606060",
         main : "#454545",
-        dark:"#303030",
+        dark:"#212121",
        },
        gray : {
         dark : "#C9C9C9",
@@ -19,7 +20,8 @@ const custom = createTheme({
         main:"#CC68FB"
        },
        white:{
-        main : "#ffffff"
+        dark : "#eeeeee",
+        main : "#ffffff",
        },
        yellow : {
         light : "#FFD84E",

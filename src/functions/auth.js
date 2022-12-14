@@ -2,6 +2,8 @@ import { auth } from "../firebase";
 import { 
     GoogleAuthProvider , 
     signInWithPopup , 
+    signInWithRedirect,
+    getRedirectResult,
     onAuthStateChanged,
     signOut as sOut,
     createUserWithEmailAndPassword,
@@ -12,12 +14,8 @@ import { changeUser } from "../redux/authSlice";
 
 import { getUserDoc } from "./firestore";
 
-export const signInWithGoogle = () => {
-    signInWithPopup(auth , new GoogleAuthProvider())
-    .then(() => {
-        console.log("signed in")
-        window.location="/"
-    })
+export const signInWithGoogle = async () => {
+    await signInWithRedirect(auth , new GoogleAuthProvider())
 }
 
 export const handleAuthChanges = () => {

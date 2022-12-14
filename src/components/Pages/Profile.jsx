@@ -13,12 +13,8 @@ import { signOut } from '../../functions/auth';
 import useGetBooksByQuery from '../../hooks/useGetBooksByQuery';
 import Preview from '../global/utils/Preview';
 import { useNavigate } from 'react-router-dom';
-import useCheckRequest from '../../hooks/useCheckRequest';
-import { addRequest } from '../../functions/firestore';
 
 const Profile = () => {
-
-    const [disableButton , setDisableButton] = useState(false)
 
     const navigate = useNavigate()
     const [docId , setDocId] = useState("")
@@ -27,7 +23,6 @@ const Profile = () => {
     const dispatch = useDispatch();
     
     const {data , pending , error} = useGetBooksByQuery("createdBy" , "==" , user.uid)
-    const {sended , pending: Spending , error:Serror} = useCheckRequest(user?.uid)
     
     React.useEffect(() => {
         dispatch(changeCurrent("profile"))
@@ -114,7 +109,7 @@ const Profile = () => {
                     }
                 }}/>
 
-                { (user?.author === false || data?.length === 0)&&
+                { data?.length === 0 &&
                 <Box
                 sx={{
                     display : "grid",
@@ -122,80 +117,7 @@ const Profile = () => {
                     justifyContent : "center",
                 }}>
 
-                        { user?.author === false &&
-                            <Box
-                        sx={{
-                            display : "grid",
-                            placeItems : "center"
-                        }}>
-                            <Typography
-                            sx={{
-                                color : "black.main",
-                                fontSize : "1rem",
-                                mb : 1
-                            }}
-                            >
-                                درخواست برای نویسندگی
-                            </Typography>
-
-                            {sended === false && !Serror &&
-                                <Button
-                                onClick={ async () => {
-                                    setDisableButton(true)
-                                    try{
-                                        await addRequest(user?.uid , user?.email)
-                                        setDisableButton(false)
-                                    }
-                                    catch(err){
-                                        console.log(err)
-                                        setDisableButton(false)
-                                    }
-                                }}
-                                sx={{
-                                    pointerEvents : disableButton ? "none" : "default",
-                                    borderRadius : "500px",
-                                    px : 2,
-                                    bgcolor :disableButton ? "gray.main" : "primary.main",
-                                }}>
-                                    <Typography
-                                    sx={{
-                                        color : disableButton ? "black.main" : "white.main",
-                                        fontSize : "14px",
-                                        fontWeight : "500"
-                                    }}
-                                    >
-                                        ارسال
-                                    </Typography>
-                                </Button>
-                            }
-
-                            {sended &&
-                                <Button
-                                onClick={() => {
-                                    addRequest(user?.uid , user?.email)
-                                }}
-                                sx={{
-                                    pointerEvents : sended ? "none" : "",
-                                    borderRadius : "500px",
-                                    px : 2,
-                                    bgcolor : sended ? "" : "primary.main",
-                                }}>
-                                    <Typography
-                                    sx={{
-                                        color : sended ? "black.main" : "white.main",
-                                        fontSize : "14px",
-                                        fontWeight : "500"
-                                    }}
-                                    >
-                                        { sended ? "ارسال شده" : "ارسال" }
-                                    </Typography>
-                                </Button>
-                            }
-
-                            </Box>
-                        }
-
-                        { (!pending && user?.author === true && data?.length === 0) &&
+                        { (!pending && data?.length === 0) &&
                             <Box
                             sx={{
                                 display : "grid",
@@ -208,7 +130,7 @@ const Profile = () => {
                                 mb : 1
                             }}
                             >
-                                شما فعلا کتابی ننوشته اید
+                                You haven't written any books yet                            
                             </Typography>
                             <Button
                             onClick={() => {
@@ -225,7 +147,7 @@ const Profile = () => {
                                     fontWeight : "500"
                                 }}
                                 >
-                                    کتاب جدید
+                                    Write a book
                                 </Typography>
                             </Button>
                             </Box>

@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Paper from "@mui/material/Paper";
 
-import { sidebarSections , authorSidebar , adminSidebar } from '../../utils/navbarSections';
+import { sidebarSections , adminSidebar } from '../../utils/navbarSections';
 import { Typography } from '@mui/material';
 
 import { useSelector } from 'react-redux';
@@ -35,14 +35,13 @@ const XlButtons = ({color , icon , url , title}) => {
     )
 }
 
-const Sidebar = ({showSidebar , setShowSidebar , admin , type}) => {
+const Sidebar = ({showSidebar , setShowSidebar , type}) => {
 
     const {current} = useSelector(state => state.navbarSlice)
     const { user } = useSelector(state => state.authSlice)
 
     let sections = sidebarSections;
-    if(user?.author) sections = [...sections , ...authorSidebar]
-    if(user?.email === "mmdj27634@gmail.com") sections = [...sections , ...adminSidebar]
+    if(user?.admin) sections = [...sections , ...adminSidebar]
     
     return (
     <>
@@ -79,12 +78,11 @@ const Sidebar = ({showSidebar , setShowSidebar , admin , type}) => {
                 transition : "all 350ms",
                 boxShadow : "-4px 0 12px rgba(20,20,20,.12)",
                 top : "0",
-                right : showSidebar ? "0" : "-300px",
+                left : showSidebar ? "0" : "-300px",
                 zIndex : 6
             }}
             >
                 <Paper
-                dir="rtl"
                 elevation={0}
                 sx={{
                     display: "flex",
@@ -122,7 +120,6 @@ const Sidebar = ({showSidebar , setShowSidebar , admin , type}) => {
                         }}>
                             <Paper
                             key={idx}
-                            dir="rtl"
                             elevation={0}
                             sx={{
                                 display : "flex",

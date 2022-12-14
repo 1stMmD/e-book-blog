@@ -8,14 +8,14 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 import CategoryInput from '../../global/CategoryInput';
 import { createBookDoc, updateBook , getBook} from '../../../functions/firestore';
-import { AssignmentReturnOutlined } from '@mui/icons-material';
 
 const textStyle = {
     fontSize : {
         xs : "1rem",
-        lg : "1.3rem"
+        lg : "1.1rem"
     },
-    color : "black.main"
+    color : "black.main",
+    my : 1,
 }
 
 const StyledTextField = ({ setValue , ...attr }) => {
@@ -32,7 +32,6 @@ const StyledTextField = ({ setValue , ...attr }) => {
                     py : 1,
                     fontSize : {
                         xs : "1rem",
-                        lg : "1.3rem",
                     },
                 }
             }}/>)
@@ -62,7 +61,7 @@ return(<Box
     }}/>)
 }
 
-const SubmitButton = ({onClick , disabled , text = "تایید"}) => {
+const SubmitButton = ({onClick , disabled , text = "Add"}) => {
 return(
     <Box
     onClick={onClick}
@@ -168,11 +167,11 @@ const FileForm = ({type , value , setValue}) => {
                     } : "40vw",
                     borderRadius : type === "book"?
                     {
-                        xs : "9px",
-                        md : "13px",
-                        lg : "14px",
-                        xl : "18px"
-                    } : 
+                        xs : "4px",
+                        md : "4px",
+                        lg : "4px",
+                        xl : "6px"
+                    }: 
                     {
                         xs : "9px",
                         md : "12px",
@@ -234,7 +233,6 @@ export const BookForm = ({
     return (
             
                 <Box
-                dir="rtl"
                 component="div"
                 sx={{
                     postion : "relative",
@@ -244,7 +242,9 @@ export const BookForm = ({
                 }}>
                     <Typography
                     sx={textStyle}
-                    >اسم کتاب</Typography>
+                    >
+                        Name 
+                    </Typography>
                     <StyledTextField
                     value={bookName}
                     setValue={setBookName}
@@ -252,7 +252,9 @@ export const BookForm = ({
 
                     <Typography
                     sx={textStyle}
-                    >اسم نویسنده </Typography>
+                    > 
+                        Author 
+                    </Typography>
                     <StyledTextField
                     value={bookAuthor}
                     setValue={setBookAuthor}
@@ -260,7 +262,9 @@ export const BookForm = ({
 
                     <Typography
                     sx={textStyle}
-                    >متن پست</Typography>
+                    >
+                        Content
+                    </Typography>
                     <TextArea
                     value={bookContent}
                     setValue={setBookContent}
@@ -268,7 +272,9 @@ export const BookForm = ({
 
                     <Typography
                     sx={textStyle}
-                    >درباره کتاب</Typography>
+                    >
+                        Description
+                    </Typography>
                     <TextArea
                     value={aboutBook}
                     setValue={setAboutBook}
@@ -276,7 +282,9 @@ export const BookForm = ({
 
                     <Typography
                     sx={textStyle}
-                    >عکس کاور</Typography>
+                    >
+                        Cover Image
+                    </Typography>
                     <FileForm
                     type="book"
                     value={bookCover}
@@ -285,7 +293,9 @@ export const BookForm = ({
 
                     <Typography
                     sx={textStyle}
-                    >دسته بندی های کتاب</Typography>
+                    >
+                        Categorys
+                    </Typography>
                     <CategoryInput
                     cValue={cValue}
                     setCValue={setCValue}
@@ -293,7 +303,7 @@ export const BookForm = ({
                     setCategorys={setCategorys}/>
 
                     <SubmitButton
-                    text={bookId && "بروزرسانی"}
+                    text={bookId && "Update"}
                     disabled={disabled}
                     onClick={() => {
                         setDisabled(true)
@@ -336,7 +346,7 @@ export const BookForm = ({
                                 about : aboutBook,
                                 categorys : categorys,
                                 cover : bookCover,
-                                content : bookContent
+                                content : bookContent,
                             },
                             setError,
                             setSuccess)
@@ -387,7 +397,6 @@ export const BannerForm = ({setError , setSuccess}) => {
                 onSubmit={(e) => {
                     e.preventDefault()
                 }}
-                dir="rtl"
                 component="div"
                 sx={{
                     postion : "relative",
@@ -398,7 +407,9 @@ export const BannerForm = ({setError , setSuccess}) => {
 
                     <Typography
                     sx={textStyle}
-                    >عنوان بنر</Typography>
+                    >
+                        Title
+                    </Typography>
                     <StyledTextField
                     value={bannerTitle}
                     setValue={setBannerTitle}
@@ -406,7 +417,9 @@ export const BannerForm = ({setError , setSuccess}) => {
 
                     <Typography
                     sx={textStyle}
-                    >لینک بنر</Typography>
+                    >
+                        Link
+                    </Typography>
                     <StyledTextField
                     value={bannerLink}
                     setValue={setBannerLink}
@@ -414,7 +427,9 @@ export const BannerForm = ({setError , setSuccess}) => {
 
                     <Typography
                     sx={textStyle}
-                    >عکس کاور بنر</Typography>
+                    >
+                        Cover image
+                    </Typography>
                     <FileForm
                     type="banner"
                     value={bannerCover}

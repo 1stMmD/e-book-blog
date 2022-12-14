@@ -4,7 +4,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
-const Divider = ({type}) => {
+const Divider = ({type , sx}) => {
     return (
         <Box
         sx={{
@@ -15,7 +15,8 @@ const Divider = ({type}) => {
             mb : type === "purple" ? 1 : 2,
             gridColumn : {
                 lg : "1/5"
-            }
+            },
+            ...sx
         }}/>
     )
 }
@@ -41,30 +42,34 @@ const Footer = () => {
             component="h5"
             sx={{
                 fontWeight : "600",
-                color : "black.main",
+                color : "black.dark",
                 fontSize : "1rem",
                 gridColumn : {
-                    lg : "3/4"
+                    lg : "2/3"
                 }
             }}>
-                درباره ما
+                About
             </Typography>
 
             <Typography
             component="h5"
             sx={{
-                color : "black.main",
+                color : "black.light",
                 fontSize : ".8rem",
                 width : "80%",
                 textAlign : "center",
                 gridColumn : {
-                    lg : "3/4"
+                    lg : "2/3"
                 },
             }}>
-                کتبو سایت و اپلیکیشنی برای مقاله ها و پیشنهاد کتاب هست, در  کتبو میتوانید مهم ترین نکته ها از بهترین کتاب ها را در مدتی کوتاه  به صورت ساده یاد بگیرید 
+                Kotobu is a platform for summarizing books, you can read books summarized by others or can become a writer and share your knowledge
             </Typography>
-
-            { window.innerWidth <= 769 && <Divider/>}
+            <Divider
+            sx={{
+                display : {
+                    lg : "none"
+                }
+            }}/>
 
             <Box
             sx={{
@@ -77,7 +82,7 @@ const Footer = () => {
                     lg : "2/4"
                 },
                 gridColumn : {
-                    lg : "2/3"
+                    lg : "3/4"
                 }
             }}
             >
@@ -112,7 +117,7 @@ const Footer = () => {
                     lg : "1/5"
                 }
             }}>
-                .کلیه حقوق این سایت محفوظ و متعلق به تیم فُرست و کُتُبو میباشد© 
+                © All copyrights of this website belong to Mohammad jamali
             </Typography>
 
             <Typography
@@ -133,7 +138,7 @@ const Footer = () => {
                     lg:"1/5"
                 }
             }}>
-                ساخته شده با  ❤  از طرف محمد جمالی
+                Made with ❤ by Mohammad Jamali
             </Typography>
             
         </Box>

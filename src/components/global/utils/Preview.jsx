@@ -21,22 +21,22 @@ const Preview = ({type , onDelete , cover , bookId}) => {
                 sx={{
                     diplay: "inline",
                     width : {
-                        xs : "80px",
-                        md : "100px",
-                        lg : "140px",
-                        xl : "180px",
+                        xs : 80,
+                        md : 90,
+                        lg : 100,
+                        xl : 110,
                     } ,
                     height : {
-                        xs :"120px",
-                        md : "150px",
-                        lg: "210px",
-                        xl : "270px",
+                        xs :120,
+                        md : 135,
+                        lg : 150,
+                        xl : 165,
                     },
                     borderRadius : {
-                        xs : "9px",
-                        md : "13px",
-                        lg : "14px",
-                        xl : "18px"
+                        xs : "4px",
+                        md : "4px",
+                        lg : "4px",
+                        xl : "6px"
                     },
                     bgcolor : "gray.main",
                     backgroundImage : `url(${cover})`,

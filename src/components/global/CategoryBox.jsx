@@ -4,13 +4,17 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {BookRef , BannerRef} from "../index";
 
-const CategoryBox = ({header , data , type , isPending}) => {
-    const [rtl , setRtl] = useState(true)
+import { useGetBooksByQuery } from "../../functions/firestore";
+
+const CategoryBox = ({header , type }) => {
+    const [rtl , setRtl] = useState(false)
     const container = useRef()
     const books = useRef()
     const value = useRef(0)
     const startPoint = useRef(0)
 
+    const [data , isPending , error] = useGetBooksByQuery("name","==","FOOL MAN")
+    console.log(data , isPending , error)
     useEffect(() => {
         if(container , books){
 
@@ -132,7 +136,7 @@ const CategoryBox = ({header , data , type , isPending}) => {
         <Box
         dir={rtl ? "rtl" : "ltr"}
         sx={{
-            py : 1,
+            py : 2,
             position : "relative",
             width : type === "bookPage" ? "80vw" : "min(1100px,90vw)",
             display : "flex",
@@ -144,10 +148,11 @@ const CategoryBox = ({header , data , type , isPending}) => {
             component="h3"
             sx={{
                 mt : 1,
+                mb : 1,
                 fontSize:{
                     xs : "1rem",
                     md : "1.2rem",
-                    lg : "1.7rem",
+                    lg : "1.3rem",
                 },
                 fontWeight:"600",
                 color:"black.dark",
@@ -171,7 +176,10 @@ const CategoryBox = ({header , data , type , isPending}) => {
                 ref={books}
                 sx={{
                     display : "flex",
-                    gap : 4,
+                    gap : {
+                        xs : 1.5,
+                        sm : 3
+                    },
                     position : "relative",
                 }}>
                 
@@ -191,6 +199,7 @@ const CategoryBox = ({header , data , type , isPending}) => {
                     <BookRef/>
                     )
                 }
+
                 {data && data.map((item , idx) => {
                     return type === "banner" ? 
                                 
@@ -208,7 +217,7 @@ const CategoryBox = ({header , data , type , isPending}) => {
                                     author={item.author} 
                                     name={item.name}
                                     cover={item.cover}
-                                    bookID={item.id}/>
+                                    bookId={item.docId}/>
                 })}
                 </Box>
             </Box>

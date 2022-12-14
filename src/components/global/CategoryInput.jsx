@@ -16,8 +16,8 @@ const Chip = ({
             px : "5px",
             bgcolor : "primary.main",
             width : "fit-content",
-            marginLeft : 1,
-            marginBottom : 1,
+            mr : 1,
+            mb : 1,
             borderRadius : "6px",
             display : "inline-flex",
             flexDirection : "row",
@@ -30,7 +30,7 @@ const Chip = ({
                 fontSize : {
                     xs : "14px"
                 },
-                mr : 1,
+                ml : 1,
             }}>
                 {children}
             </Typography>
@@ -48,7 +48,7 @@ const Chip = ({
                 placeItems : "center",
                 bgcolor : "primary.main",
                 p : .5,
-                marginRight : 1,
+                ml : 1,
                 cursor : "pointer",
             }}
             >

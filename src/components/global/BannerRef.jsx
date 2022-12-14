@@ -14,7 +14,12 @@ const BannerRef = ({cover , link , title}) => {
             minWidth:"clamp(220px,50vw,700px)",
             minHeight:"clamp(110px,25vw,350px)",
             bgcolor:"#e1e1e1",
-            borderRadius : "max(2vw , 10px)",
+            borderRadius : {
+                xs : "12px",
+                md : "16px",
+                lg : "18px",
+                xl : "24px"
+            },
             scrollSnapAlign:"start",
             backgroundImage : cover ? `url(${cover})` : "",
             backgroundPosition : "center",

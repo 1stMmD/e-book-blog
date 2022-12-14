@@ -18,6 +18,7 @@ export {default as EditBook} from "./Pages/EditBook";
 export {default as EditBanner} from "./Pages/EditBanner";
 export {default as ErrorBox} from "./global/ErrorBox";
 export {default as SuccessBox} from "./global/SuccessBox";
-export {default as Requests } from "./Pages/Requests";
 export { default as Login } from "./Pages/Login";
 export { default as Signup } from "./Pages/Signup";
+export { default as BookPopup } from "./global/popup/BookPopup";
+export { default as Search } from "./Pages/Search";
